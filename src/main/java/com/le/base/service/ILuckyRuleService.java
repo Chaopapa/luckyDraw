@@ -24,6 +24,7 @@ public interface ILuckyRuleService extends IService<LuckyRule> {
      */
     R findPage(Page<LuckyRule> pagination, LuckyRule search);
 
+    LuckyRule getByTime();
     /**
      * 添加或修改
      *

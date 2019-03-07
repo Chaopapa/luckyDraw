@@ -16,6 +16,27 @@
         <result column="limit_phone" property="limitPhone" />
     </resultMap>
 
+    <select id="searchByDate" resultType="com.le.base.entity.LuckyRule">
+        SELECT
+            id,
+            limit_begin_date,
+            limit_end_date,
+            begin_date,
+            end_date,
+            limit_min_price,
+            limit_max_price,
+            limit_no,
+            limit_phone
+        FROM
+            biz_lucky_rule
+        WHERE
+          #{nowDate}
+        BETWEEN
+          begin_date
+        AND
+          end_date
+    </select>
+
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, create_date, modify_date,

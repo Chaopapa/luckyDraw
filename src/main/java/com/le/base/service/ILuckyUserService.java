@@ -4,6 +4,9 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.le.base.entity.LuckyUser;
 import com.le.core.rest.R;
+import com.le.base.entity.dto.AisheliOrderDto;
+
+import java.util.List;
 
 /**
  * <p>
@@ -31,4 +34,5 @@ public interface ILuckyUserService extends IService<LuckyUser> {
      * @return
      */
     R editData(LuckyUser luckyUser);
+    String doDrawAndSaveUser(List<AisheliOrderDto> orders);
 }
