@@ -41,10 +41,5 @@ public class LuckyUser extends SuperEntity {
      */
     private String address;
 
-    /**
-     * 中奖时间
-     */
-    private Date luckyDate;
-
 }
 
