@@ -2,4 +2,25 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.le.base.mapper.LuckyRuleMapper">
 
+    <select id="searchByDate" resultType="com.le.base.entity.LuckyRule">
+        SELECT
+            id,
+            limit_begin_date,
+            limit_end_date,
+            begin_date,
+            end_date,
+            limit_min_price,
+            limit_max_price,
+            limit_no,
+            limit_phone
+        FROM
+            biz_lucky_rule
+        WHERE
+          #{nowDate}
+        BETWEEN
+          begin_date
+        AND
+          end_date
+    </select>
+
 </mapper>
