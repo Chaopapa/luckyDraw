@@ -1,0 +1,51 @@
+{
+    "respCode": "0000",
+    "data": {
+        "id": "00c57d8e-e8fd-4b15-8acb-46c53ab86981",
+        "username": "zhangsan",
+        "allNum": 3,
+        "childrens": [
+            {
+                "cAllNum": 3,
+                "cUsername": "18065192027",
+                "c": [
+                    {
+                        "cAllNum": 3,
+                        "cUsername": "kukong",
+                        "cID": "8d06ab94-a510-4820-b9e9-1c16282e4fa5"
+                    }
+                ],
+                "cID": "5a998174-fd48-45b0-b22a-ea5a835fc459"
+            },
+            {
+                "cAllNum": 3,
+                "cUsername": "hanbing",
+                "c": [
+                    {
+                        "cAllNum": 3,
+                        "cUsername": "kukong",
+                        "cID": "8d06ab94-a510-4820-b9e9-1c16282e4fa5"
+                    },
+                    {
+		                "cAllNum": 3,
+		                "cUsername": "第四层",
+		                "c": [
+		                    {
+		                        "cAllNum": 3,
+		                        "cUsername": "第五层",
+		                        "cID": "8d06ab94-a510-4820-b9e9-1c16282e4fff"
+		                    }
+		                    
+		                ]
+		                ,
+		                "cID": "ff5cd113-dca6-4eab-bf1b-a0163df1b1aa"
+		            }
+                    
+                ]
+                ,
+                "cID": "ff5cd113-dca6-4eab-bf1b-a0163df1b155"
+            }
+        ]
+    },
+    "respMsg": "操作成功"
+}

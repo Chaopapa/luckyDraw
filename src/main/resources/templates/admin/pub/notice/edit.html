@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    [@le.head _title="通知信息编辑"]
+    [/@le.head]
+    <body class="container-fluid">
+    <p></p>
+    <form id="form" method="post" action="editData" component="bootstrapvalidator" class="form-horizontal row form-col2" bv-success="bvSuccess">
+        <input type="hidden" name="id" class="form-control" value="${notice.id}">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label col-sm-4">标题:</label>
+                <div class="col-sm-8">
+                    <input type="text" class="form-control" name="title" value="${notice.title}" placeholder="请输入通知标题" required maxlength="50" [#if notice.title!=null]readonly[/#if] />
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-sm-12" >
+            <div class="form-group">
+                <label class="control-label col-sm-2" style="">内容:</label>
+                <div class="col-sm-10">
+                    <textarea id="content" validate type="text"  class="form-control" style="height: 250px"
+                              name="content" rows="5" maxlength="800" [#if notice.content!=null]readonly[/#if]>${notice.content}</textarea>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-sm-6" [#if notice.id!=null]style="display:none;"[/#if] >
+            <div class="form-group">
+                <div class="col-sm-8 col-sm-offset-3">
+                    <button type="submit" id="add" class="btn btn-primary">提交</button>
+                </div>
+            </div>
+        </div>
+        </div>
+    </form>
+    <script id="script">
+
+        function usernameValidate(jqForm, vdom) {
+        }
+
+        //提交返回参数
+        function success(data) {
+            if (data.data.respCode == "0000") {
+                System.parent.System.alert({
+                    title: '数据编辑',
+                    text: '操作成功',
+                    type: 'success'
+                })
+                closewindow();
+                System.parent.refreshData();
+            } else {
+                System.alert({
+                    title: '数据编辑',
+                    text: '操作失败',
+                    type: 'error'
+                })
+            }
+        }
+        //关闭当前页
+        function closewindow() {
+            System.closeThisWindow();
+        }
+    </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

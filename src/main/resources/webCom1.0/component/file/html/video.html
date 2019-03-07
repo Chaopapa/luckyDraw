@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <title>video.html</title>
+  </head>
+  <link href="../css/video-js.css" rel="stylesheet">  
+  <script src="../js/video.js"></script>
+  <script>document.writeln('<script type="text/javascript" src="../../../base.js?'+new Date().getTime()+'" ><\/script>');</script>
+  <style>
+  	.vjs-fullscreen-control{position:relative;z-index:-1;}
+  	.vjs-default-skin .vjs-volume-handle{top:-1px;}
+  </style>
+  <body>
+  	<div id="videoDiv"></div>
+  </body>
+  <script>
+  	_V_.options.flash.swf = "../js/video-js.swf";
+  	System.ready(function(){
+  		var url = System.getQueryString('url');
+  		var ext = System.getQueryString('ext');
+  		var width = $(window).width();
+  		var height = $(window).height();
+  		var html ='';
+  		html+='<video id="video" class="video-js vjs-default-skin" controls preload="none" width="'+width+'" height="'+height+'" poster="" data-setup="{}" >';
+  		html+='	<source src="'+url+'" type="video/'+ext+'" />';
+  		html+='</video>';
+  		$('#videoDiv').html(html);
+  		var myPlayer =_V_($('#video')[0],{}, function() {
+		  // This is functionally the same as the previous example.
+		});
+  		myPlayer.play();
+  		$(window).resize(function(){
+  			width = $(window).width();
+  	  		height = $(window).height();
+  			myPlayer.size(width,height);
+  		})
+  	})
+  </script>
+</html>

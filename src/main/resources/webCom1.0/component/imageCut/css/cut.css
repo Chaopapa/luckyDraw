@@ -1,0 +1,34 @@
+.img-contianer{	
+	max-height: 360px;
+	width: 100%;
+	margin-bottom: 20px;
+}
+
+.img-contianer img{
+	width: 100%;	
+}
+
+.img-preview{
+	background-color:#ddd;
+	text-align: center;
+	width: 100%;
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+
+.preview-lg{
+	width:220px;
+	height:139px;
+}
+.preview-md{
+	width:139px;
+	height:78px;
+}
+.preview-sm{
+	width:69px;
+	height:39px;
+}
+.preview-xs{
+	width:35px;
+	height:20px;
+}

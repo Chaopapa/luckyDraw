@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.le.system.mapper.SysResourceMapper">
+
+    <!-- 角色id查询角色的所有权限 -->
+    <select id="queryByRoleId" parameterType="Long" resultType="com.le.system.entity.SysResource">
+		SELECT
+            e.id,
+            e.name
+        FROM
+            sys_role_resource r
+        LEFT JOIN sys_resource e ON r.resource_id = e.id
+        WHERE
+            r.role_id = #{roleId}
+	</select>
+    <select id="findUserResourceList" resultType="com.le.system.entity.SysResource">
+        SELECT DISTINCT res.id, res.create_date, res.modify_date, res.parent_id, res.name, res.url, res.permission, res.type, res.icon, res.seq, res.deep
+        FROM sys_user_role ur JOIN sys_role_resource rr ON ur.role_id = rr.role_id
+            JOIN sys_resource res ON rr.resource_id = res.id
+        WHERE res.type=0
+            <if test="user != null">
+            and ur.user_id = #{user.id,jdbcType=BIGINT}
+            </if>
+        ORDER BY res.deep, res.seq
+    </select>
+
+</mapper>

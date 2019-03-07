@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    [@le.head _title="系统配置详情"]
+    [/@le.head]
+	<body style="padding: 20px;">
+		<form id="form" method="post" action="editData" component="form2" form-beforesubmit="beforeSubmit" form-noactionsubmit="onSubmit" form-success="success" form-onload="formOnload" form-beforeserialize="beforeSerialize"	class="form-horizontal" >
+			<table component="layout">
+				<tbody>
+                    <tr>
+                        <td>
+                            <label>阿里云AccessKeyId:</label>
+                            <input type="text" class="form-control" name="aliyunAccessKeyId" validate="" value="${cloudStorageConfigs.aliyunAccessKeyId}" placeholder="请输入阿里云AccessKeyId"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>阿里云AccessKeySecret:</label>
+                            <input type="text" class="form-control" name="aliyunAccessKeySecret" validate="" value="${cloudStorageConfigs.aliyunAccessKeySecret}" placeholder="请输入阿里云AccessKeySecret"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>阿里云BucketName:</label>
+                            <input type="text" class="form-control" name="aliyunBucketName" validate="" value="${cloudStorageConfigs.aliyunBucketName}" placeholder="请输入阿里云BucketName"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>阿里云绑定的域名:</label>
+                            <input type="text" class="form-control" name="aliyunDomain" validate="" value="${cloudStorageConfigs.aliyunDomain}" placeholder="请输入阿里云绑定的域名"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>阿里云EndPoint:</label>
+                            <input type="text" class="form-control" name="aliyunEndPoint" validate="" value="${cloudStorageConfigs.aliyunEndPoint}" placeholder="请输入阿里云EndPoint"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>阿里云路径前缀:</label>
+                            <input type="text" class="form-control" name="aliyunPrefix"  value="${cloudStorageConfigs.aliyunPrefix}" placeholder="请输入阿里云路径前缀"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>七牛云存储空间名:</label>
+                            <input type="text" class="form-control" name="qiniuBucketName" validate="" value="${cloudStorageConfigs.qiniuBucketName}" placeholder="请输入七牛云存储空间名"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>七牛云绑定的域名:</label>
+                            <input type="text" class="form-control" name="qiniuDomain" validate="" value="${cloudStorageConfigs.qiniuDomain}" placeholder="请输入七牛云绑定的域名"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>七牛云路径前缀:</label>
+                            <input type="text" class="form-control" name="qiniuPrefix" validate="" value="${cloudStorageConfigs.qiniuPrefix}" placeholder="请输入阿里云BucketName"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>七牛云SECRET_KEY:</label>
+                            <input type="text" class="form-control" name="qiniuSecretKey" validate="" value="${cloudStorageConfigs.qiniuSecretKey}" placeholder="请输入七牛云SECRET_KEY"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>七牛云ACCESS_KEY:</label>
+                            <input type="text" class="form-control" name="qiniuAccessKey" validate="" value="${cloudStorageConfigs.qiniuAccessKey}" placeholder="请输入七牛云ACCESS_KEY"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>启用:</label>
+                            <select name="type" validate="" component="chosen">
+                                <option value="0" [#if cloudStorageConfigs.type =="0"]selected="selected"[/#if]>阿里云</option>
+                                <option value="1" [#if cloudStorageConfigs.type =="1"]selected="selected"[/#if]>七牛云</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            <input type="submit" value="提交" id="add" class="btn btn-primary pull-right"/>
+                        </td>
+                    </tr>
+				</tbody>
+			</table>
+		</form>
+		<script id="script">
+
+            //提交返回参数
+            function success(data) {
+                if (data.data.respCode == "0000") {
+                    System.parent.System.alert({
+                        title: '数据编辑',
+                        text: '操作成功',
+                        type: 'success'
+                    })
+                } else {
+                    System.alert({
+                        title: '数据编辑',
+                        text: data.data.respMsg||'保存失败',
+                        type: 'error'
+                    })
+                }
+            }
+
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

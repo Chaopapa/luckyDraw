@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>绑定账号</title>
+		<script>document.writeln('<script type="text/javascript" src="${base}/resources/webCom1.0/base.js?'+new Date().getTime()+'" ><\/script>');</script>
+	</head>
+	<body style="padding: 20px;">
+		<form id="form" method="post" action="bindData" component="form2" form-beforesubmit="beforeSubmit" form-noactionsubmit="onSubmit" form-success="success" form-onload="formOnload" form-beforeserialize="beforeSerialize"	class="form-horizontal" >
+			<input type="hidden" name="id" class="form-control" value="${id}">
+			<table component="layout">
+				<tbody>
+                    <tr>
+                        <td>
+                            <label>绑定账号:</label>
+                            <input type="text" class="form-control" name="bizUserName" validate="validatePassword" value="" placeholder="请输入绑定账号"  />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td >
+                            <input type="submit" value="提交" id="add" class="btn btn-primary pull-right"/>
+                        </td>
+                    </tr>
+				</tbody>
+			</table>
+		</form>
+		<script id="script">
+
+            //提交返回参数
+            function success(data) {
+                if (data.data.code == "0000") {
+                    System.parent.System.alert({
+                        title: '数据编辑',
+                        text: '操作成功',
+                        type: 'success'
+                    })
+                    closewindow();
+                    System.parent.refreshData();
+                } else {
+                    System.alert({
+                        title: '数据编辑',
+                        text: data.data.msg,
+                        type: 'error'
+                    })
+                }
+            }
+
+            //关闭当前页
+            function closewindow() {
+                System.closeThisWindow();
+            }
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

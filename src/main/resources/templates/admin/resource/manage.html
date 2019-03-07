@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head>
+    [@le.head _title="资源管理"]
+	[/@le.head]
+</head>
+<body>
+	<div class="x-row">
+	<div class="col-lg-2">
+		<div class="ibox float-e-margins">
+		    <div class="ibox-title">
+		        <h5>资源列表<small class="m-l-sm"></small></h5>
+		        <div class="ibox-tools">
+		        	<a style="color:red;text-decoration:none;" onclick="add()" >
+                        <i class="fa fa-plus">添加</i>
+                    </a>
+		            <a style="color:red;text-decoration:none;" onclick="del()">
+                        <i class="fa fa-remove">删除</i>
+                    </a>
+		        </div>
+		    </div>
+		    <div class="ibox-content">
+		    	<div id="tree"  component="treeView" dataList="zNodes" getFirstNode-callback="getFirstNodeList"  dataType="1" click-callback="tree_click"  tree-getNodes="getCheck" style="width: 100%;margin-top: 10px" id="treeDemo2" ></div>
+		    </div>
+		</div>
+	</div>
+	<div class="col-lg-10">
+		<div class="ibox float-e-margins">
+		    <div class="ibox-title">
+		        <h5 id="projectText">资源信息管理 <small class="m-l-sm"></small></h5>
+		        <div class="ibox-tools">
+		            <a class="collapse-link" style="display:none;">
+		                <i class="fa fa-chevron-up"></i>
+		            </a>
+		        </div>
+		    </div>
+		    <div class="ibox-content">
+		    	<ul id="myTab" class="nav nav-tabs">
+					<li class="active">
+						<a data-toggle="tab">
+							 资源信息
+						</a>
+					</li>
+
+				</ul>
+				<div id="myTabContent" class="tab-content" style="padding-top:30px;">
+					<div class="tab-pane fade in active">
+						<div class="container-fluid roleMain">
+							 <form id="form" method="post" action="editData" component="form2" form-success="success" class="form-horizontal" >
+								<input type="hidden" value="" id="id" name="id">
+								<table component="layout">
+									<tbody>
+										<tr>
+											<td>
+												<label>名称:</label>
+												<input type="text" class="form-control"name="name" validate="" id="name" placeholder="请输入名称" />
+											</td>
+											<td>
+												<label>排序:</label>
+												<input type="text" class="form-control"name="seq" validate="seqValidate" id="seq" placeholder="请输入排序(数字)"/>
+											</td>
+									    </tr>
+									    <tr>
+									    	<td>
+									    		<label>上级菜单：</label>
+												<select class="form-control" id="parentId" name="parentId"  placeholder="无" style="width:100%;">
+                                                    <option value="0">无</option>
+                                                    [#macro menuParent _list]
+													[#list _list as parent]
+														<option value="${parent.id}">[#list 0..(parent.deep-1) as n]　[/#list]${parent.name}</option>
+                                                        [@menuParent parent.children /]
+													[/#list]
+                                                    [/#macro]
+                                                    [@menuParent list /]
+												</select>
+									    	</td>
+									    	<td>
+												<label>权限标识:</label>
+												<input type="text" class="form-control" name="permission" id="permission" placeholder="请输入权限标识"/>
+											</td>
+									    </tr>
+									    <tr>
+									    	<td>
+									    		<label>资源类型：</label>
+									    		<select class="form-control" id="type" name="type" validate="" placeholder="请选择资源类型" style="width:100%;">
+                                                    <option value="MENU" selected="selected">菜单</option>
+											        <option value="PERMISSION">权限</option>
+											    </select>
+									    	</td>
+									    	<td>
+												<label>URL:</label>
+												<input type="text" class="form-control" name="url" id="url" placeholder="请输入URL"/>
+											</td>
+									    </tr>
+									    <tr>
+											<td >
+												<input type="submit" value="添加" id="btn" class="btn btn-primary pull-right" />
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</form>
+						</div>
+					</div>
+				</div>
+		    </div>
+		</div>
+	</div>
+</div>
+
+
+</body>
+</html>
+<script id="script">
+	var bs = false;
+	var oPermission = "";
+	var zNodes =${tree};
+
+	//所有的js执行程序必须在webReady执行之后才能执行
+	var webReady = function(){
+
+	}
+
+	//获取列表详细信息
+	function getFirstNodeList(node){
+		modifyListInfo(node)
+	}
+
+	//点击树获取列表信息
+	function tree_click(node){
+		modifyListInfo(node);
+	}
+
+	//修改列表信息方法
+	function modifyListInfo(node){
+		$.ajax({
+			url:'manageData?id='+node.id,
+			successAuto:function(data){
+				//修改节点
+				$("#name").val(data.data.resource.name);
+				$("#seq").val(data.data.resource.seq);
+				$("#permission").val(data.data.resource.permission);
+				var dataType = data.data.resource.type;
+				if(dataType){
+					$("#type").val(dataType);
+				}
+				$("#url").val(data.data.resource.url);
+				$("#id").val(data.data.resource.id);
+				$("#parentId").val(data.data.resource.parentId);
+				$("#btn").val("修改");
+				oPermission = data.data.resource.permission;
+			}
+		})
+	}
+
+
+	/*点击操作按钮时候的获取当前行数据的事件*/
+    window.operateEvents = {
+        'click .edit': function (e, value, row, index) {
+            System.openWindow({
+				id:'modify',
+				title:'修改',
+				url:'edit?id='+row.id+"&",
+				width:'960px',
+				height:'450px',
+				maxmin:true
+			});
+        }
+    };
+
+
+	//树修改
+	function getCheck(nodes){
+		if(nodes[0]){
+			editTitle = nodes[0].name;
+			$("#projectText").html(editTitle+'管理信息');
+		}
+	}
+
+
+	function success(data){
+		if(data.data.respCode=="0000"){
+			System.parent.System.alert({
+			  title:'数据编辑',
+			  text:'操作成功',
+			  type:'success'
+		    })
+		    window.location.reload(true);
+		}else{
+			System.alert({
+			  title:'数据编辑',
+			  text:'操作失败',
+			  type:'error'
+		    })
+		}
+	}
+
+	function add(){
+		var parentId = $("#id").val();
+		$("#name").val("");
+		$("#seq").val("");
+		$("#permission").val("");
+        $("#parentId").val("0");
+		$("#url").val("");
+		$("#id").val("");
+		$("#btn").val("添加");
+		oPermission = '';
+	}
+
+	function del(){
+		System.confirm({
+		  	title:'系统提示',
+		  	text:'确认删除资源',
+		  	type:'warning  ',
+		  	callback:function(bool){
+		  	if(bool){
+		  		$.ajax({
+					url:'del?id='+ $("#id").val(),
+					type:"get",
+					success:function(data){
+						if(data.respCode=="0000"){
+							System.parent.System.alert({
+							  title:'数据删除',
+							  text:'删除成功',
+							  type:'success'
+						    })
+						    window.location.reload(true);
+						}else{
+							System.alert({
+							  title:'数据删除',
+							  text:'删除失败,请先删除子菜单',
+							  type:'error'
+						    })
+						}
+					},
+					error: function() {
+						System.alert({
+						  title:'系统提示',
+						  text:'请求错误，请检查',
+						  type:'error'
+					    })
+					}
+				});
+		  	}
+			}
+		})
+	}
+
+</script>

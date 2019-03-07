@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+    [@le.head _title="角色管理"]
+	[/@le.head]
+<body>
+	<div class="x-row">
+		<div class="x-row-cols " style="width: 20%;">
+			<div class="float-e-margins table-panel "  style="margin-right: 25px;">
+		        <div class="ibox-title">
+		            <h5>组织列表</h5>
+		        </div>
+		    </div>
+		    <div style="padding-left:10px;padding-right:25px;">
+		    	<div  component="treeView" dataList="zNodes"  dataType="2" click-callback="tree_click"  style="background: #ccc;width: 100%;" id="treeDemo2" ></div>
+		    </div>
+		</div>
+		<div class="x-row-cols " style="margin-left:20%;padding-right:15px;">
+			<div class="float-e-margins table-panel">
+				<div class="ibox-title">
+					<h5>角色信息管理</h5>
+				</div>
+			</div>
+	    	<table id="table" 
+				component="table" 
+				class="table-striped" 
+				table-url = 'manageData'
+				data-search-from="form" 
+				data-search="false" 
+				data-show-refresh="true" 
+				data-show-toggle="true" 
+				data-show-columns="true" 
+				data-show-export="false" 
+				data-refresh-callback="refresh" 
+				data-load-callback="loadback" 
+				data-height="100%" 
+				data-search="true" 
+				dataType="1" 
+				data-dataList="json" 
+				data-page-list="[5,10]" 
+				data-ajaxType="json" 
+				data-remove-callback="remove" 
+				data-checkbox="true"
+				data-search-callback="" 
+				data-BeforeDel="beforeDel" 
+				data-add-callback="add"
+				data-operation='{"remove":{icon:"remove","event":"click",class:"remove",eventFun:"removeEve"}}'>
+				<thead>
+                <tr>
+					<th data-field="name" data-align='center'>名称</th>
+					<th data-field="modifyDate" data-align='center'>更新时间</th>
+					<th data-field="createDate" data-align='center'>创建时间</th>
+                    <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"
+                        data-width="80" data-align='center'>操作
+                    </th>
+                </tr>
+			    </thead>
+			</table>
+	    </div>
+	</div>
+</body>
+</html>
+<script id="script">
+	
+	var zNodes =[
+		{ id:33, pId:0, name:"龙屹科技"}
+	]; 
+				
+	//所有的js执行程序必须在webReady执行之后才能执行
+	var webReady = function(){
+		
+	}
+	
+	//添加
+	function add(){
+		System.openWindow({
+			id:'roleInfo',
+			title:'添加角色',
+			url:'edit',
+			width:'550px',
+			height:'450px',
+			maxmin:true
+		});
+	}
+	
+	//删除
+	function remove(data) {
+		var checkNodes = '';
+		for(var i = 0; i < data.length; i++) {
+			if(checkNodes == '') {
+				checkNodes = data[i].id;
+			} else {
+				checkNodes = checkNodes + ',' + data[i].id;
+			}
+		}
+		System.confirm({	
+			title: '系统提示',
+			text: '是否确认删除?',
+			type: 'warning',
+			callback: function(bool) {
+				if(bool) {
+					$.ajax({
+						url: "del",
+                        type: "get",
+						data: {ids: checkNodes},
+						dataType: "json",	
+						success: function(json) {
+							if(json.respCode == '0000') {
+								System.alert({
+									title: '删除操作',
+									text: '删除成功',
+									type: 'success'
+								})
+								refreshData();
+							} else {
+								System.alert({
+									title: '删除操作',
+									text: json.respMsg,
+									type: 'error'
+								})
+							}	
+						},
+						error: function() {
+							System.alert({
+								title: '系统提示',
+								text: '请求错误，请检查',
+								type: 'error'
+							})
+						}
+					});
+				}
+			}
+		})
+	}
+	
+	//操作栏
+	function operateFormatter(value, row, index) {
+        var list = [];
+		list.push('<a class="edit" href="javascript:void(0)" title="修改"><i class="fa fa-edit"></i>修改</a>  ');
+		return list.join('');
+    }
+	/*点击操作按钮时候的获取当前行数据的事件*/
+    window.operateEvents = {
+        'click .edit': function(e, value, row, index) {
+			System.openWindow({
+				id: 'modify',
+				title: '修改',
+				url: 'edit?id=' + row.id + "&",
+				width: '60%',
+				height: '60%',
+				maxmin: true
+			});
+		}
+    };
+	
+	//刷新数据
+	function refreshData(){
+	     $("#table").bootstrapTable("refresh");
+	}
+</script>

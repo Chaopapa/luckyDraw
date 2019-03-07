@@ -1,0 +1,20 @@
+.block-label{
+	text-align: left!important;
+	float: none!important;
+	width:100%!important;
+}
+.ell-label .control-label{
+	text-overflow: ellipsis; 
+	white-space: nowrap; 
+	overflow: hidden;
+	display: block;
+}
+.block-input{
+	margin-left: 0!important;
+}
+.row.td.ml0{
+	margin-left: 0;
+}
+.row.td.mr0{
+	margin-right: 0;
+}

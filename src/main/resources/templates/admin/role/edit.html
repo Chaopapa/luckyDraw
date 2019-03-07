@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+    [@le.head _title="角色编辑"]
+    [/@le.head]
+	<body style="padding: 20px;">
+		<form id="form" method="post" action="editData" component="form2" form-beforesubmit="beforeSubmit" form-noactionsubmit="onSubmit" form-success="success" form-onload="formOnload" form-beforeserialize="beforeSerialize"	class="form-horizontal" >
+			<input type="hidden" name="id" class="form-control" value="${role.id}">	
+			<input type="hidden" id="resourceIds" name="resourceIds"/>
+			<table component="layout">
+				<tbody>
+					<tr>
+						<td>
+							<label>角色名称:</label>
+							<input type="text" class="form-control"name="name" validate="" value="${role.name}" placeholder="请输入角色名称"  />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>权限:</label>
+							<div id="dropDownTree" validate="" style="width: 100%;" 
+								tree-height="220"
+								dropDwonTree-dataList="mydata" 
+								dropDwonTree-dataType="4"
+								data-checkNodes='${resources}'
+								drop-callback="getVal" 
+								drop-getCheck="getCheck" 
+								search-callback="dropSearch" 
+								getFirstNode-callback="getfrirst"
+								>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td >
+							<input type="submit" value="提交" id="add" class="btn btn-primary pull-right"    />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</form>
+		<script id="script">
+            //所有的js执行程序必须在webReady执行之后才能执行
+            var mydata = [];
+            System.ready(function () {
+                getCheck();
+            })
+
+            var webReady = function () {
+                $.ajax({
+                    type: "get",
+                    url: "${base}/admin/resource/tree",
+                    success: function (data) {
+                        mydata = data.data.trees;
+                        System.initComponent('#dropDownTree', 'dropDownTree');
+                    }
+                });
+            }
+
+            var myNodeObj;
+
+            function getCheck(checkNode) {
+                myNodeObj = checkNode;
+                var checkNodes = [];
+                if (checkNode != undefined && checkNode != "") {
+                    for (var i = 0; i < checkNode.length; i++) {
+                        checkNodes.push(checkNode[i].id);
+                    }
+                    $("#resourceIds").val(checkNodes);
+                }
+            }
+
+            //提交返回参数
+            function success(data) {
+                if (data.data.respCode == "0000") {
+                    System.parent.System.alert({
+                        title: '数据编辑',
+                        text: '操作成功',
+                        type: 'success'
+                    })
+                    closewindow();
+                    System.parent.refreshData();
+                } else {
+                    System.alert({
+                        title: '数据编辑',
+                        text: '操作失败',
+                        type: 'error'
+                    })
+                }
+            }
+
+            //关闭当前页
+            function closewindow() {
+                System.closeThisWindow();
+            }
+		</script>
+	</body>
+</html>

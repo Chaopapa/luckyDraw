@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	[@le.head _title="首页"]
+    <link type="text/css" rel="stylesheet" href="${baseRes}/css/index.css"/>
+    [/@le.head]
+<body class="container-fluid gray-bg">
+<p></p>
+[#list allFarm as farm]
+    [#if sensons[farm.id?string]?has_content]
+<div class="ibox">
+    <div class="ibox-heading">
+        <div class="ibox-title">${farm.name}</div>
+    </div>
+    <div class="ibox-content">
+        <div class="row">
+        [#list sensons[farm.id?string] as sensor]
+            <div class="col-lg-3 col-xs-6">
+                <!-- small box -->
+                <div class="small-box [#if sensor.status == "normal"]bg-green[#else]bg-red[/#if]">
+                    <div class="inner">
+                        <h3>${sensor.portValue} ${sensor.unitSymbol}</h3>
+                        <p>${sensor.name} <span class="text-sm">(${sensor.typeName})</span></p>
+                    </div>
+                    <div class="icon">
+                        <img class="ion" src="${sensor.icon}" />
+                    </div>
+                </div>
+            </div>
+        [/#list]
+        </div>
+    </div>
+</div>
+    [/#if]
+[/#list]
+<script type="">
+    $(function () {
+    })
+</script>
+</body>
+</html>

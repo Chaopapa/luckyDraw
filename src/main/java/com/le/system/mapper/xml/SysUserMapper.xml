@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.le.system.mapper.SysUserMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.le.system.entity.SysUser">
+        <result column="id" property="id" />
+        <result column="create_date" property="createDate" />
+        <result column="modify_date" property="modifyDate" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="name" property="name"/>
+        <result column="phone" property="phone"/>
+        <result column="status" property="status"/>
+    </resultMap>
+    <!-- 查询用户的所有权限 -->
+    <select id="findAuthorities" resultType="String">
+		SELECT DISTINCT e.permission
+        FROM sys_user_role o
+        JOIN sys_role_resource r ON o.role_id = r.role_id
+        JOIN sys_resource e ON r.resource_id = e.id and e.type=1 and e.permission is not null and e.permission != ''
+        WHERE o.user_id = #{userId}
+	</select>
+    <!--用户表，角色表，用户角色表三表联合查询-->
+    <select id="findSysRole" resultMap="BaseResultMap">
+        SELECT s.*, GROUP_CONCAT(r.name order by r.create_date ) roleName  FROM
+        (sys_user AS s LEFT JOIN sys_user_role AS u ON s.id=u.user_id)
+        LEFT JOIN sys_role AS r ON u.role_id=r.id
+        where 1=1
+        <if test="search.username!=null and search.username!=''">
+            and s.username=#{search.username}
+        </if>
+        <if test="search.phone!=null and search.phone!=''">
+            and s.phone=#{search.phone}
+        </if>
+        <if test="search.name!=null and search.name!=''">
+            and s.name like #{search.name}
+        </if>
+        group by s.username
+        order by s.create_date
+    </select>
+
+</mapper>

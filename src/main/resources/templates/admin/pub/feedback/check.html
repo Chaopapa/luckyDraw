@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    [@le.head _title="反馈信息详情"]
+    [/@le.head]
+    <body class="container-fluid">
+    <p></p>
+    <form id="form" method="post" action="editData" component="bootstrapvalidator" class="form-horizontal row form-col2" bv-success="bvSuccess">
+        <input type="hidden" name="id" class="form-control" value="${feedBack.id}">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label col-sm-4">创建人ID:</label>
+                <div class="col-sm-8">
+                    <input type="text"readonly class="form-control" name="userId" value="${feedBack.userId}"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label col-sm-4">创建人姓名:</label>
+                <div class="col-sm-8">
+                    <input type="text"readonly class="form-control" name="userId" value="${user.nickName}" />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label col-sm-4">创建人手机号:</label>
+                <div class="col-sm-8">
+                    <input type="text"readonly class="form-control" name="mobile" value="${user.mobile}"id="type" />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label col-sm-4">类型:</label>
+                <div class="col-sm-8">
+                    <div class="form-control" name="type" required>
+                        [#if feedBack.type=='complaint']投诉[/#if][#if feedBack.type=='advise']建议[/#if]
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group">
+                <label class="control-label col-sm-2">图片:</label>
+                <div class="col-sm-10">
+                    <input type="text" id="image" component="file" name="url" class="form-control" value="${picture}">
+                    <style>
+                        .imglist-addli{
+                            display: none!important;
+                        }
+                        .imglist-panel{
+                            display: none;
+                        }
+                    </style>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12" >
+            <div class="form-group">
+                <label class="control-label col-sm-2" >内容:</label>
+                <div class="col-sm-10">
+                    <textarea id="content" validate type="text"  class="form-control" style="height: 180px"
+                              name="content" rows="5" readonly>${feedBack.content}</textarea>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div class="col-sm-8 col-sm-offset-3">
+                    <button type="submit" id="add" class="btn btn-primary"style="display: none">提交</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script id="script">
+
+        function usernameValidate(jqForm, vdom) {
+        }
+
+        //提交返回参数
+        function success(data) {
+            if (data.data.respCode == "0000") {
+                System.parent.System.alert({
+                    title: '数据编辑',
+                    text: '操作成功',
+                    type: 'success'
+                })
+                closewindow();
+                System.parent.refreshData();
+            } else {
+                System.alert({
+                    title: '数据编辑',
+                    text: '操作失败',
+                    type: 'error'
+                })
+            }
+        }
+        //关闭当前页
+        function closewindow() {
+            System.closeThisWindow();
+        }
+
+    </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

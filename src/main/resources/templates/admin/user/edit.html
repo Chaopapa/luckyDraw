@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    [@le.head _title="用户编辑"]
+    [/@le.head]
+	<body style="padding: 20px;">
+		<form id="form" method="post" action="editData" component="form2" form-beforesubmit="beforeSubmit" form-noactionsubmit="onSubmit" form-success="success" form-onload="formOnload" form-beforeserialize="beforeSerialize"	class="form-horizontal" >
+			<input type="hidden" name="id" class="form-control" value="${user.id}">
+			<input type="hidden" name="oldUsername" class="form-control" value="${user.username}">
+			<table component="layout">
+				<tbody>
+						<tr>
+							<td>
+								<label>用户账号:</label>
+								<input type="text" class="form-control"name="username" validate="usernameValidate" value="${user.username}" placeholder="请输入用户账号"  />
+							</td>
+							<td>
+								<label>名称:</label>
+								<input type="text" class="form-control"name="name" validate="" value="${user.name}" placeholder="请输入名称"  />
+							</td>
+						</tr>
+							[#if !(user.id ??)]
+								<tr>
+									<td>
+										<label>密码:</label>
+										<input type="password" class="form-control" name="password" validate="validatePassword" value="${user.password}" placeholder="请输入密码"  />
+									</td>
+									<td>
+										<label>确认密码:</label>
+										<input type="password" class="form-control" name="confirmPassword" validate="validateConfirmPassword" value="${user.password}" placeholder="请输入确认密码"  />
+									</td>
+								</tr>
+							[/#if]
+						</tr>
+                        <td>
+                            <label>状态:</label>
+                            <div component="checkRadio" id="checkRadio" validate="" placeholder="请选择状态">
+                                <input type="radio" name="status" value="0" [#if user.status == "" || user.status == "0"]checked[/#if] >
+                                <label >可用</label>
+                                <input type="radio" name="status" value="1" [#if user.status == "1"]checked[/#if] >
+                                <label >不可用</label>
+                            </div>
+                        </td>
+						<tr>
+                            <td>
+                                <label>角色：</label>
+                                <div component="checkBox" id="checkBox" validate="">
+                                [#list roles as role]
+                                    <input type="checkbox" name="roleId" value="${role.id}" [#if roleMap[role.id?string]?has_content]checked[/#if]  />
+                                    <label >${role.name}</label>
+                                [/#list]
+                                </div>
+                            </td>
+						</tr>
+						<tr>
+							<td >
+								<input type="submit" value="提交" id="add" class="btn btn-primary pull-right"/>
+							</td>
+						</tr>
+				</tbody>
+			</table>
+		</form>
+		<script id="script">
+
+            function usernameValidate(jqForm, vdom) {
+                var form = jqForm[0]; //把表单转化为dom对象
+                var reg = /^[0-9a-zA_Z]+$/;
+                if (!reg.test(vdom.value)) {
+                    return '请输入英文和数字组合的账号';
+                }
+                if (form.username.value) {
+                    $.ajax({
+                        type: "post",
+                        url: "checkUserName",
+                        data: {username: form.username.value, oldUsername: form.oldUsername.value},
+                        dataType: "json",
+                        success: function (json) {
+                            if (json) {
+                                System.getComponent('#form').isSubmit = false;
+                                System.getComponent('#form').setValidateError(vdom, '用户名已存在');
+                            } else {
+                                System.getComponent('#form').isSubmit = true;
+                            }
+                        },
+                        error: function () {
+                            System.getComponent('#form').isSubmit = false;
+                            System.alert({
+                                title: '系统提示',
+                                text: '请求错误，请检查',
+                                type: 'error'
+                            })
+                        }
+                    });
+                }
+            }
+
+            function validatePassword(jqForm, vdom) {
+                if (vdom.value != jqForm[0].confirmPassword.value && jqForm[0].confirmPassword.value.Trim() != "") {
+                    System.getComponent('#form').setValidateError(jqForm[0].confirmPassword, '两次输入的密码不一致');
+                } else {
+                    System.getComponent('#form').clearValidateError(jqForm[0].confirmPassword);
+                }
+            }
+
+            function validateConfirmPassword(jqForm, vdom) {
+                if (vdom.value != jqForm[0].password.value) {
+                    return '两次输入的密码不一致';
+                } else {
+                    System.getComponent('#form').clearValidateError(jqForm[0].password);
+                }
+            }
+
+            //提交返回参数
+            function success(data) {
+                if (data.data.respCode == "0000") {
+                    System.parent.System.alert({
+                        title: '数据编辑',
+                        text: '操作成功',
+                        type: 'success'
+                    })
+                    closewindow();
+                    System.parent.refreshData();
+                } else {
+                    System.alert({
+                        title: '数据编辑',
+                        text: '操作失败',
+                        type: 'error'
+                    })
+                }
+            }
+
+            //关闭当前页
+            function closewindow() {
+                System.closeThisWindow();
+            }
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

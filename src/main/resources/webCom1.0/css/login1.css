@@ -1,0 +1,224 @@
+/*登录界面开始*/
+.choseCheck{
+			width:100%;
+			height:4rem;			
+			margin:1rem auto;
+		}
+	
+		.choseCheck .check_code{
+			width:100%;
+			height:4rem;
+			position: relative;
+		}
+		.c_code{
+			width: 50%;
+			height:100%;
+			position: absolute;
+			
+			left:0;
+			top:0;
+		}
+		.c_codeImg{
+			width: 40%;
+			height:100%;
+			position:absolute;
+			right: 0;
+			top:0;
+			
+		}
+		.c_codeImg img{
+			width:100%;
+			height:3rem;
+		}
+		.myinput{
+			width: 100%;
+			height:100%;
+			font-size:2rem;
+			text-indent: 0.3rem;
+			outline: green;
+			color:#000;
+			
+		}
+		
+		.phone_check{
+			width:100%;
+			height:4rem;			
+			margin:1rem auto;
+			margin-bottom:0;
+			position:relative;
+		}
+		.code_input{
+			width: 50%;
+			height:3rem;
+			position:absolute;
+			right: 0;
+			top:0;
+		}
+		.check_pCode{
+			width: 45%;
+			height:100%;
+			position:absolute;
+			left: 0;
+			top:0;
+			margin-bottom:0;
+		}
+		#send{
+			width: 100%;
+			height:3rem;
+			border-radius: 0.2rem;
+			background: #1c84c6;
+			border:0;
+		}
+		#send:hover{
+			background: #1A7BB9;
+		}
+		.swicth{
+			    width: 100%;
+			    height: 3.5rem;
+			    margin-bottom: 2rem;
+			    position: absolute;
+			    top: 0.075rem;
+			    right: -1.43rem;
+		}
+		.s_view{
+			width:70% ;
+			height:100%;
+			
+			position:absolute;
+			right:10%;
+		}
+		.s_view .s_txt{
+			width: 75%;
+			height:100%;
+			position:absolute;
+			left:0;
+			color:#fff;
+			line-height: 2.5;
+			font-size:1.2rem;
+		}
+		.s_view .s_img{
+			width: 20%;
+			height:100%;
+			position:absolute;
+			right:0;
+			cursor: pointer;
+			
+		}
+		.s_view .s_img img{
+			width: 100%;
+			height:100%;
+		}
+		
+		.s_txt .mymessage{
+			background: rgba(51,136,255,.8);
+			width: 90%;
+			height:100%;
+			border-radius: 0.5rem;
+			position: relative;
+			
+			
+		}
+		
+		.mymessage:before{
+			content: "";
+			position:absolute;
+			top:50%;
+			left:-0.6rem;
+			/*background: rgba(51,136,255,.8);*/
+			border:0.8rem solid rgba(51,136,255,.8);
+			border-top:0.8rem solid transparent;
+			border-bottom:0.8rem solid transparent;
+			border-left:0;
+			margin-top:-0.8rem;
+		}
+		.mymessage .m_prompt{
+			
+			width: 100%;
+			margin-left:1.2rem;
+		}
+		
+		
+		.scanCode{
+			width:100%;
+			
+		}
+		.scanCode h4{
+			text-align: center;
+		}
+		.code_img{
+			    margin: 0 auto;
+			    width: 10rem;
+			    height: 10rem;
+			    background: #fff;
+			    line-height: 10rem;
+			    text-align: center;
+			
+		}
+		.code_img img{
+			width: 90%;
+			height:90%;
+		}
+		.description{
+			margin:0 auto;
+			width: 18rem;
+			height: 4rem;
+			margin-top: 2rem;
+			
+			position:relative;
+		}
+		.description .d_img{
+			    height: 2.5rem;
+			    width: 3rem;
+			    position: absolute;
+			    left: 0;
+			    top: 0.2rem;
+		}
+		.description .d_img img{
+			width: 100%;
+			height:100%;
+		}
+		.description .d_txt{
+			height:4rem;
+			width: 14.5rem;			
+			position: absolute;
+			right:0;
+		}
+		
+		.msprompt{
+			width:10rem;
+			height:3rem;
+			background:rgba(51,136,255,.8);
+			border-radius: 0.5rem;
+			position:absolute;
+			right:-7rem;
+			top:-0.2rem;
+			line-height: 3rem;
+			display: none;		
+		}
+		
+		.s_txt1{
+			width: 75%;
+			height:100%;
+			position:absolute;
+			left:0;
+			color:#fff;
+			line-height: 2.5;
+			font-size:1.2rem;	
+		}
+		.st_show{
+			width:70%;
+			height:70%;
+			position:absolute;
+			right:-1.6rem;
+			top:15%;
+		}
+		.st_show .st_show{
+			width: 100%;
+			height:100%;
+		}
+		.s_foot{
+			width: 100%;
+			height: 2rem;
+		}
+		
+	/*登录界面结束*/

@@ -1,0 +1,207 @@
+.filelist{
+	overflow: hidden;
+}
+.filelist li {
+    width: 110px;
+    height: 110px;
+    text-align: center;
+    margin: 0 8px 20px 0;
+    position: relative;
+    display: inline;
+    float: left;
+    overflow: hidden;
+    font-size: 12px;
+}
+.uploader-progress-queue-item {
+	background-color: #F5F5F5;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	font: 11px Verdana, Geneva, sans-serif;
+	margin-top: 5px;
+	max-width: 350px;
+	padding: 10px;
+}
+.uploader-progress .uhide{
+	transition: all 1s;
+	-webkit-transition: all 1s;
+	-moz-transition: all 1s;
+	-ms-transition: all 1s;
+	-o-transition: all 1s;
+	opacity: 0;
+	display: none;
+}
+.uploader-progress{
+	transition: all 1s;
+	-webkit-transition: all 1s;
+	-moz-transition: all 1s;
+	-ms-transition: all 1s;
+	-o-transition: all 1s;
+	opacity: 1;
+	display: block;
+}
+.uploader-progress-error {
+	background-color: #FDE5DD !important;
+}
+.uploader-progress-queue-item .cancel a {
+	background: url('../img/uploadify-cancel.png') 0 0 no-repeat;
+	float: right;
+	height:	16px;
+	text-indent: -9999px;
+	width: 16px;
+}
+.uploader-progress-queue-item .percentage{
+	padding-left: 20px;
+}
+.uploader-progress-queue-item.completed {
+	background-color: #E5E5E5;
+}
+.uploader-progress-progress {
+	background-color: #E5E5E5;
+	margin-top: 10px;
+	width: 100%;
+}
+.uploader-progress-progress-bar {
+	background-color: #0099FF;
+	height: 3px;
+	width: 1px;
+}
+.webuploader-pick{
+	position: relative;
+    background: none;
+   	color: #676a6c;
+    padding: 0;
+    display: block;
+}
+
+
+.fileBox{
+   position: relative;
+   margin-bottom: -10px;
+}
+.imglist{
+	position: relative;
+}
+.imglist:after{
+	display: block;
+	content:'';
+	height: 0;
+	line-height: 0;
+	width: 100%;
+	clear: both;
+	font-size: 0;
+}
+.fileBox .lo{
+	position:absolute;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+	z-index:2;
+	background:rgba(0,0,0,0);
+}
+.imglist,.imglist li{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+.imglist li{
+	width: 100px;
+    height: 100px;
+    text-align: center;
+    margin: 0 10px 10px  0;
+    position: relative;
+    display: block;
+    float: left;
+    font-size: 12px;
+	overflow: hidden;
+	z-index:3;
+}
+.imglist-addli{
+	position: relative;
+	z-index: 1!important;
+}
+.imglist-addli:after{
+	content: '';
+	display: block;
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	border: 1px dashed #ccc;
+	z-index: -1;
+}
+.imglist-addli.hide{
+	display:none!important;
+}
+.imglist-addli-addBtn{
+	display: block;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	line-height: 100px;
+	text-align: center;
+}
+.imglist-addli-addBtn img{
+	vertical-align: middle;
+}
+.imglist-container{
+	position: absolute;
+	z-index: 0;
+	left: 0;
+	top: 0;
+	right:0;
+	bottom: 0;
+}
+.imglist-panel,.imglist-name{
+	position: absolute;
+	z-index: 1;
+    height: 0;
+    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#80000000', endColorstr='#80000000')\0;
+    background: rgba( 0, 0, 0, 0.5 );
+    width: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 300;
+	transition: all 0.3s;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-o-transition: all 0.3s;
+}
+.imglist li:hover .imglist-panel{
+	height: 30px;
+}
+.imglist-name{
+	height: 30px;
+	line-height:30px;
+	color:#ccc;
+	top:auto;
+	bottom:0;
+	background:none;
+	text-overflow: ellipsis; white-space: nowrap; overflow: hidden; 
+}
+.imglist li .imglist-panel .btn{
+	padding: 0;
+	display: block;
+	width: 24px;
+	height: 24px;
+    float: right; 
+    overflow: hidden;
+	background: url(../img/icons.png) no-repeat;
+    margin: 5px 1px 1px;
+    cursor: pointer;
+}
+.imglist li .imglist-panel .btn.rel{
+	background-position: -72px -24px;
+}
+.imglist li .imglist-panel .btn.rel:hover{
+	background-position: -72px 0px;
+}
+.imglist li .imglist-panel .btn.del{
+	background-position: -48px -24px;
+}
+.imglist li .imglist-panel .btn.del:hover{
+	background-position: -48px 0px;
+}

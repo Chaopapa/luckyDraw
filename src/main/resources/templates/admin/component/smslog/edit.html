@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+    [@le.head _title="短信记录编辑"]
+    [/@le.head]
+<body class="container-fluid">
+<p></p>
+<form id="form" method="post" action="editData" component="bootstrapvalidator" class="form-horizontal row form-col2">
+    <input type="hidden" name="id" class="form-control" value="${sysSmslog.id}">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">手机号:</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="mobile" value="${sysSmslog.mobile}" placeholder="请输入手机号" required />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">短信类型:</label>
+            <div class="col-sm-8">
+                <input type="number" class="form-control" name="type" value="${sysSmslog.type}" placeholder="请输入短信类型" required />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">验证码:</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="captcha" value="${sysSmslog.captcha}" placeholder="请输入验证码" required />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">发送时间:</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="sendTime" value="${sysSmslog.sendTime}" placeholder="请输入发送时间" required />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">截止时间:</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="endTime" value="${sysSmslog.endTime}" placeholder="请输入截止时间" required />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">标记:</label>
+            <div class="col-sm-8">
+                <input type="number" class="form-control" name="flag" value="${sysSmslog.flag}" placeholder="请输入标记" required />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">短信签名:</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="signName" value="${sysSmslog.signName}" placeholder="请输入短信签名" required />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">短信模板id:</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="tplCode" value="${sysSmslog.tplCode}" placeholder="请输入短信模板id" required />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">发送结果:</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="result" value="${sysSmslog.result}" placeholder="请输入发送结果" required />
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <div class="col-sm-8 col-sm-offset-4">
+                <button type="submit" id="add" class="btn btn-primary">提交</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    //所有的js执行程序必须在webReady执行之后才能执行
+    var webReady = function () {
+
+    };
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

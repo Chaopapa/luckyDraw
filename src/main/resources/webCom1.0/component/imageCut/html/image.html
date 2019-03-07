@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<script>document.writeln('<script type="text/javascript" src="../../../../webCom1.0/base.js?'+new Date().getTime()+'" ><\/script>');</script>
+		<style>
+			.hideBtn{display:none;}
+		</style>
+	</head>
+	<body>
+		<div class="container" component="imageCut" style="padding-top:15px;">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="img-contianer">
+						<img id="image" onclick="inputImage.click()" />
+					</div>
+				</div>
+				<!-- div class="col-md-3">
+					<div class="docs-preview">
+						<div class="img-preview preview-lg"></div>
+						<div class="img-preview preview-md"></div>
+						<div class="img-preview preview-sm"></div>
+						<div class="img-preview preview-xs"></div>
+					</div>
+				</div-->
+			</div>
+			
+			<div class="row " >
+				<div class="col-md-9 docs-button">
+					<form id="clipOssUpload" method="post" enctype="multipart/form-data" action="" target="hideIframe">
+						<input type="hidden" name="width" value="" />
+						<input type="hidden" name="height" value="" />
+						<input type="hidden" name="posX" value="" />
+						<input type="hidden" name="posY" value="" />
+						<div class="btn-group hideBtn">
+							<button class="btn btn-primary" title="放大" data-method="zoom" type="button" data-option="0.1">
+								<span class="fa fa-search-plus"></span>
+							</button>
+							<button class="btn btn-primary" title="缩小" data-method="zoom"  data-option="-0.1" type="button">
+								<span class="fa fa-search-minus"></span>
+							</button>
+						</div>
+						
+						<div class="btn-group hideBtn">
+							<!--button class="btn btn-primary" title="逆时针旋转45。" data-method="rotate"  data-option="-45" type="button">
+								<span class="fa fa-rotate-left"></span>
+							</button  -->
+							<button class="btn btn-primary" title="重置" data-method="reset"  type="button">
+								<span class="fa fa-refresh"></span>
+							</button>
+							<!--button class="btn btn-primary" title="顺时针旋转45。"  data-method="rotate"  data-option="45" type="button">
+								<span class="fa fa-rotate-right"></span>
+							</button  -->
+						</div>
+						
+						<div class="btn-group">
+							<label class="btn btn-primary" for="inputImage" title="选择图片" >
+								<input type="file" name="inputImage" id="inputImage" class="sr-only"/>
+								<span class="fa fa-send" ></span> 选择图片
+							</label>
+						</div>
+						
+						<div class="btn-group">
+							<!-- button class="btn btn-primary hideBtn" type="button" title="剪裁" id="cutImage">
+								<span class="fa fa-cut"></span> 剪裁
+							</button -->
+							<button class="btn btn-primary hideBtn" type="button" title="保存" id="uploadImage">
+								<span class="fa fa-save"></span> 保存
+							</button>
+						</div>
+					</form>
+				</div>
+				<div class="col-md-3" style="display: none;" id="cutGroupBtn">
+					<div class="btn-group cutSize">
+						<label class="btn btn-primary">
+							<input type="radio" name="aspectRatio" id="aspectRation0" class="sr-only" value="1.777777777" />
+							<span class="docs-toolip"  class="docs-toolip" data-toggle="toolip">16:9</span>
+						</label>
+						<label class="btn btn-primary">
+							<input type="radio" name="aspectRatio" id="aspectRation1" class="sr-only" value="1.333333333" />
+							<span  class="docs-toolip" data-toggle="toolip">4:3</span>
+						</label>
+						<label class="btn btn-primary">
+							<input type="radio" name="aspectRatio" id="aspectRation2" class="sr-only" value="1" />
+							<span>1:1</span>
+						</label>
+						<label class="btn btn-primary">
+							<input type="radio" name="aspectRatio" id="aspectRation3" class="sr-only" value="0.666666666" />
+							<span  class="docs-toolip" data-toggle="toolip">2:3</span>
+						</label>
+						<label class="btn btn-primary">
+							<input type="radio" name="aspectRatio" id="aspectRation4" class="sr-only" value="NaN" />
+							<span  class="docs-toolip" data-toggle="toolip">Free</span>
+						</label>	
+					</div>					
+				</div>
+			</div>
+		</div>
+	</body>
+	<script>
+		var clipOssUpload = document.getElementById('clipOssUpload');
+		clipOssUpload.setAttribute('action',base+'/admin/file/clipOssUpload.jhtml');
+	</script>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    [@le.head _title="短信配置"]
+    [/@le.head]
+<body class="container-fluid">
+<p> </p>
+<form id="form" method="post" action="sms" component="bootstrapvalidator" class="form-horizontal">
+    <div class="form-group">
+        <label class="control-label col-sm-2">accessKeyId:</label>
+        <div class="col-sm-8 col-lg-5">
+            <input type="text" class="form-control" name="accessKeyId" value="${config.accessKeyId}" placeholder="请输入accessKeyId" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2">accessKeySecret:</label>
+        <div class="col-sm-8 col-lg-5">
+            <input type="text" class="form-control" name="accessKeySecret" value="${config.accessKeySecret}" placeholder="请输入accessKeySecret" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2">验证码模板id:</label>
+        <div class="col-sm-8 col-lg-5">
+            <input type="text" class="form-control" name="codeTplCode" value="${config.codeTplCode}" placeholder="请输入验证码模板id" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2">短信签名:</label>
+        <div class="col-sm-8 col-lg-5">
+            <input type="text" class="form-control" name="signName" value="${config.signName}" placeholder="请输入短信签名" required />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2">验证码位数:</label>
+        <div class="col-sm-8 col-lg-5">
+            <input type="number" class="form-control" name="captchaLength" value="${config.captchaLength}" placeholder="请输入验证码位数"
+                   required min="1" max="10" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-sm-2">验证码有效时间(秒):</label>
+        <div class="col-sm-8 col-lg-5">
+            <input type="number" class="form-control" name="captchaExpires" value="${config.captchaExpires}" placeholder="请输入验证码有效时间"
+                   required min="0" max="9999999" />
+            <div class="help-block">0表示永久有效</div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-8 col-sm-offset-2">
+            <button type="submit" id="add" class="btn btn-primary">提交</button>
+        </div>
+    </div>
+</form>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

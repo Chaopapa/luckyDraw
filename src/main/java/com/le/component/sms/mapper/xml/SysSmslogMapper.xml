@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.le.component.sms.mapper.ComSmslogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.le.component.sms.entity.ComSmslog">
+        <result column="id" property="id" />
+        <result column="create_date" property="createDate" />
+        <result column="modify_date" property="modifyDate" />
+        <result column="mobile" property="mobile" />
+        <result column="type" property="type" />
+        <result column="captcha" property="captcha" />
+        <result column="send_time" property="sendTime" />
+        <result column="end_time" property="endTime" />
+        <result column="flag" property="flag" />
+        <result column="signName" property="signName" />
+        <result column="tplCode" property="tplCode" />
+        <result column="result" property="result" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, create_date, modify_date, 
+        mobile, type, captcha, send_time, end_time, flag, sign_name, tpl_code, result
+    </sql>
+    <select id="selectLastSmslog" resultType="com.le.component.sms.entity.ComSmslog">
+        select <include refid="Base_Column_List"></include>
+        from sys_sms_log
+        where mobile=#{mobile} and type=#{smsType}
+        order by create_date desc
+        limit 1
+    </select>
+
+</mapper>

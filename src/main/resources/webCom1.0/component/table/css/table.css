@@ -1,0 +1,123 @@
+.columns-right.btn-group.pull-right,.pull-right.search{
+	
+}
+.bootstrap-table li{
+	list-style: none;
+}
+.fixed-table-toolbar{
+	height: 54px!important;
+}
+.fixed-table-toolbar button{
+	margin-bottom: 0!important;
+}
+.fixed-table-pagination .page-fast{
+	display: inline-block;
+	margin-left: 5px;
+}
+.fixed-table-pagination .page-fast input{
+	width: 50px;
+	display: inline-block;
+	margin-left: 2px;
+	margin-right: 2px;
+	text-align: center;
+}
+/*.tablePanel:nth-of-type(2n){
+	background: #fafafa;
+}*/
+.tablePanel:after{
+	content: '';
+	display: block;
+	width: 100%;
+	height: 0;
+	font-size: 0;
+	line-height: 0;
+	clear: both;
+}
+.tablePanel,.tablePanel>li{
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	font-size:13px;
+}
+.tablePanel{
+	padding-top: 0px!important;
+}
+/*默认4等分*/
+.tablePanel>li{
+	float: left;
+	position: relative;
+	width: 25%;
+	padding-left: 64px;
+	padding-right: 30px;
+	padding-bottom: 10px;
+}
+.tablePanel>li>label{
+	margin-top: 8px;
+	position: absolute;
+	display: block;
+	width: 70px;
+	left: 0;
+	top: 0;
+	text-align: left;
+	text-overflow: ellipsis; white-space: nowrap; overflow: hidden;
+}
+.tablePanel>li>input,
+.tablePanel>li>[component]{
+	width: 100%!important;
+}
+.tablePanel>li>button{
+	margin-bottom: 0!important;
+	float:left;
+	margin-right:5px!important;
+}
+.tablePanel>li>button:first-child{
+	margin-left: -64px;
+}
+.tablePanel>li>button:last-child{
+	margin-right:0!important;
+}
+/*5等分*/
+.tablePanel.parts-5>li{
+	width: 20%;
+}
+/*3等分*/
+.tablePanel.parts-3>li{
+	width: 33.33%;
+}
+/*2等分*/
+.tablePanel.parts-2>li{
+	width: 50%;
+}
+/*无等分*/
+.tablePanel.parts-none>li{
+	padding-left: 0;
+	width: 120px;
+}
+.tablePanel.parts-none>li>label{
+	width: auto!important;
+}
+li.tablePanel-btn{
+	width:auto!important;
+}
+.tablePanel.parts-none>li.tablePanel-btn{
+	padding-left: 0px!important;
+}
+.tablePanel.parts-none>li>button:first-child{
+	margin-left: 0px!important;
+}
+@media only screen and (max-width: 987px){
+	.tablePanel>li{
+		width: 100%!important;
+	}
+	.tablePanel>li>button:first-child{
+		margin-left: 0px;
+	}
+}
+.fixed-table-toolbar .pull-left button{
+	margin-left:0!important;
+	margin-right:5px!important;
+	float:left;
+}
+.fixed-table-toolbar .pull-left button:last-child{
+	margin-right:0!important;
+}

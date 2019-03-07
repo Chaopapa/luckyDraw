@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>操作日志信息</title>
+    <script>document.writeln('<script type="text/javascript" src="${base}/resources/webCom1.0/base.js?'+new Date().getTime()+'" ><\/script>');</script>
+</head>
+<body>
+	<div class="ibox float-e-margins">
+		<div class="ibox-title">
+	        <h5 id="titleTxt">操作日志信息<small class="m-l-sm"></small></h5>
+	        <div class="ibox-tools">
+	            <a class="collapse-link" style="display:none;">
+	                <i class="fa fa-chevron-up"></i>
+	            </a>
+	        </div>
+		</div>
+		<div class="ibox-content">
+			<form id="form" component="form2"  class="form-horizontal"  >
+			</form>
+    	<table id="table" 
+				component="table" 
+				class="table-striped" 
+				table-url = 'manageData'
+				data-search-from="form" 
+				data-search="false" 
+				data-show-refresh="true" 
+				data-show-toggle="true" 
+				data-show-columns="true" 
+				data-show-export="false" 
+				data-refresh-callback="refresh" 
+				data-load-callback="loadback" 
+				data-height="100%" 
+				data-search="true" 
+				dataType="1" 
+				data-dataList="json" 
+				data-page-list="[5,10]" 
+				data-ajaxType="json" 
+				data-remove-callback="remove" 
+				data-checkbox="false"
+				data-search-callback="" 
+				data-BeforeDel="beforeDel" 
+				data-add-callback="add"
+                data-show-add="false"
+				data-operation='{"remove":{icon:"remove","event":"click",class:"remove",eventFun:"removeEve"}}'>
+				<thead>
+                <tr>
+                    <th data-field="userId" data-align='center'>用户Id</th>
+                    <th data-field="username" data-align='center'>用户名</th>
+                    <th data-field="operation" data-align='center'>操作</th>
+                    <th data-field="method" data-align='center'>请求方法</th>
+                    <th data-field="params" data-align='center'>请求参数</th>
+                    <th data-field="time" data-align='center'>执行时长(毫秒)</th>
+                    <th data-field="ip" data-align='center'>IP地址</th>
+                    <th data-field="createDate" data-align='center'>创建时间</th>
+                </tr>
+				</thead>
+			</table>
+	    </div>
+	</div>
+</body>
+</html>
+	<script id="script">
+	//所有的js执行程序必须在webReady执行之后才能执行
+	var webReady = function(){
+		
+	}
+
+	//刷新数据
+	function refreshData(){
+	     $("#table").bootstrapTable("refresh");
+	}
+
+</script>

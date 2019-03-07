@@ -1,0 +1,31 @@
+[
+	{
+		"text": "父节点 121212",
+		"nodes": "子节点" ,
+		"tags": ["4"],
+		 "nodes": [
+                {
+                    "text": "子节点 1",
+                    "href": "#child1",
+                    "tags": ["2"],
+                    "nodes": [
+                        {
+                            "text": "孙子节点 1",
+                            "href": "#grandchild1",
+                            "tags": ["0"]
+                  },
+                        {
+                            "text": "孙子节点 2",
+                            "href": "#grandchild2",
+                            "tags": ["0"]
+                  }
+                ]
+              },
+                {
+                    "text": "子节点 2",
+                    "href": "#child2",
+                    "tags": ["0"]
+              }
+            ]
+	}
+]

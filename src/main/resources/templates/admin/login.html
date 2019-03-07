@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+[@le.head]
+    <link type="text/css" rel="stylesheet" href="${base}/resources/webCom1.0/css/login1.css" />
+    <link type="text/css" rel="stylesheet" href="${base}/resources/webCom1.0/css/login.css" />
+	<base id="basePath" href="${base}" />
+    <!--[if lt IE 9]>
+<meta http-equiv="refresh" content="0;ie.html" />
+<script>
+	window.onload = function(){
+		myIe();
+	};
+
+	var myIe = function(){
+		var body = document.getElementsByTagName('body')[0];
+		body.className= 'mybody';
+		body.innerHTML = '';
+	}
+</script>
+    <![endif]-->
+	<!-- 引入封装了failback的接口--initGeetest -->
+	<script src="http://static.geetest.com/static/tools/gt.js"></script>
+	<!-- 若是https，使用以下接口 -->
+	<!-- <script src="https://static.geetest.com/static/tools/gt.js"></script> -->
+	<style>
+        .mybody{
+            background: #3cbbdc url(${base}/resources/webCom1.0/img/browser.png) no-repeat center center;
+        }
+    </style>
+	<script language="JavaScript">
+        //判断当前窗口是否有顶级窗口，如果有就让当前的窗口的地址栏发生变化，
+        //这样就可以让登陆窗口显示在整个窗口了
+        function loadTopWindow(){
+            //form表单提交错误需要重新登录
+            if(System.getQueryString('type')=="min"){
+                return;
+            }
+            if (window.top!=null && window.top.document.URL!=document.URL){
+                window.top.location= document.URL;
+            }
+        }
+    </script>
+[/@le.head]
+
+<body class="signin" id="body" onload="loadTopWindow()">
+    <div class="signinpanel">
+        <div class="row">
+            <div class="col-sm-7">
+               <div class="signin-info">
+                    <div class="logopanel m-b">
+                        <h1></h1>
+                    </div>
+                    <div class="m-b">
+                    </div>
+                    <div class="m-b">
+                    	<img src="${base}/resources/webCom1.0/img/loginlogo.png" />
+                        <!--<li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势一</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势二</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势三</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势四</li>
+                        <li><i class="fa fa-arrow-circle-o-right m-r-xs"></i> 优势五</li>-->
+                    </div>
+                    <h1 style="margin-top:50px;letter-spacing: 8px;"><b>欢迎使用！</b></h1>
+                    <!--<strong>还没有账号？ <a href="#">立即注册&raquo;</a></strong>-->
+                </div>
+            </div>
+            <div class="col-sm-5">          	
+                <form id="login" style="width:350px;">
+                	<div class="swicth">
+                		<div class="s_view" style="display:none">
+                			<div class="s_txt1" >
+                				<div class="st_show">
+                					<img src="${base}/resources/webCom1.0/img/pass_login.png" />
+                				</div>
+                			</div>
+                			<div class="s_img" >
+                				<img src="${base}/resources/webCom1.0/img/switch.png" />
+                			</div>
+                		</div>
+                		<div class="msprompt">
+                				<div class="mymessage">
+                					<div class="m_prompt">密码登录在这里</div>
+                				</div>
+                		</div>
+                	</div>
+                    <h4 class="no-margins" >后台登录</h4>
+                    <p class="m-t-md"></p>
+                    <!--密码登录开始-->
+                    <div class="per_login" >
+	                    <input type="text" id="username" name="username" value="" class="form-control uname" placeholder="用户名" autofocus />
+	                    <input type="password" id="password" name="password" value="" class="form-control pword m-b" placeholder="密码"/>
+	                    <a >忘记密码了？</a>
+	                    <div style="width:100%;margin-top: 20px;margin-bottom: 10px;">
+							<div id="popup-captcha"></div>	                    
+	                    </div>
+               		 </div>
+                	<!--密码登录结束-->
+                	<!--二维码验证开始-->
+                	<div class="scanCode" style="display: none;">
+                		<h4>扫码登录</h4>
+                		<div class="code_img">
+                			<img src="${base}/resources/webCom1.0/img/qccode.png" />
+                		</div>
+                		<div class="description">
+                			<div class="d_img">
+                				<img src="${base}/resources/webCom1.0/img/scan.png" />
+                			</div>
+                			<div class="d_txt">
+                				打开<a href="#">手机龙屹</a>
+                				<br>扫一扫登录 更安全的登录方式
+                			</div>
+                		</div>
+                	</div>
+                <!--二维码验证结束-->
+                </form>
+            </div>
+        </div>
+        
+    </div>
+     <div style="position:absolute;bottom:0;width:100%;">    	  
+           <div >
+           	   <div class="signup-footer" style="margin-top:0;"></div>
+	           	<div style="text-align: center;margin-bottom:5px;">
+	                &copy; 2017 All Rights Reserved. longwang
+	            </div>
+           </div>
+        </div>  
+    <script>
+    	/*计算高度开始*/
+    	var ContentTop = (parseInt($(document).height()) -parseInt($(".signinpanel").css("height")))/2;
+		$(".signinpanel").css("margin-top",ContentTop+"px");
+    	/*计算高度结束*/
+    	var username=$('#username').val();
+    	var password=$('#password').val();
+    	if(!System.getCookie("username")){
+			$('#username').val("")
+		}else{
+			$('#username').val(System.getCookie("username"));
+		}
+		if(!System.getCookie("password")){
+			$('#password').val("")
+		}else{
+			$('#password').val(System.getCookie("password"));
+		}
+    	//所有的js执行程序必须在webReady执行之后才能执行
+		var webReady = function(){
+		}
+    	/**
+    	 * 功能：定义切换方式,根据点击切换变换样式
+    	 * i:控制切换
+    	 */
+    	var i=1; 	
+    	$(".s_img").click(function(){
+    		i++;
+    		if(i%2==0){
+    			$(".s_img img").attr("src","${base}/resources/webCom1.0/img/scancode1.png");
+    			$(".m_prompt").html("扫码登录在这里");
+    			$(".per_login").show();
+    			$(".scanCode").hide();
+    			$(".st_show img").attr("src","${base}/resources/webCom1.0/img/scan_safe.png");
+    			
+    		}else{
+    			$(".s_img img").attr("src","${base}/resources/webCom1.0/img/switch.png");
+    			$(".m_prompt").html("密码登录在这里");
+    			$(".scanCode").show();
+    			$(".per_login").hide();
+    			$(".st_show img").attr("src","${base}/resources/webCom1.0/img/pass_login.png");
+    		}	
+    	})
+    	
+    	function validate(){
+		    username=$('#username').val();
+		    password=$('#password').val();
+			if (!username){  
+	      		System.toast("用户名不能为空！");
+	      		return false;
+	      	}
+	      	if (!password){  
+	      		System.toast("用户名不能为空！");
+	      		return false;
+	      	}
+	      	return true;
+		}
+    	/**
+    	 * 功能：极验验证
+    	 */
+	    var handlerPopup = function (captchaObj) {
+	    	captchaObj.onReady(function(){
+	    		var st = setInterval(function(){
+	    			if($('.gt_slider .gt_guide_tip.gt_show').length>0){
+	    				clearInterval(st);
+	    				$('.gt_slider .gt_guide_tip.gt_show').html("按住左边滑块，完成拼图进行登录");
+	    			}
+	    			if($('.gt_help_button').length>0){
+	    				clearInterval(st);
+	    				$('.gt_help_button').remove();
+	    			}
+	    			if($('.gt_logo_button').length>0){
+	    				clearInterval(st);
+	    				$('.gt_logo_button').remove();
+	    			}
+		   		},100)
+	    	});
+	        // 成功的回调
+	        captchaObj.onSuccess(function () {
+	            var validates = captchaObj.getValidate();
+		   		if(validate()){
+		   			 $.ajax({
+		                url: "${base}/admin/loginCheck?t=" + (new Date()).getTime(), // 进行二次验证
+		                type: "post",
+		                dataType: "json",
+		                data: {
+		                    geetest_challenge: validates.geetest_challenge,
+		                    geetest_validate: validates.geetest_validate,
+		                    geetest_seccode: validates.geetest_seccode,
+		                    username: username,
+		                    password: password
+		                },
+		                success: function (data) {
+		                var last=JSON.stringify(data);
+		                    if (data && (data.respCode === "0000")) {
+		                    	location.href = "${base}/admin/main";
+		                    	System.setCookie("username",username,7);
+		                    	System.setCookie("password",password,7);
+		                    } else {
+		                    	captchaObj.refresh();
+		                        System.toast(data.respMsg);
+		                    }
+		                }
+		            });
+		   		}
+		   		setTimeout(function(){
+		   			captchaObj.refresh();
+		   		},500)
+	        });
+	        // 将验证码加到id为captcha的元素里
+	        captchaObj.appendTo("#popup-captcha");
+	        // 更多接口参考：http://www.geetest.com/install/sections/idx-client-sdk.html
+	    };
+	    
+    	// 验证开始需要向网站主后台获取id，challenge，success（是否启用failback）
+	    $.ajax({
+	        url: "${base}/geetest/register?t=" + (new Date()).getTime(), // 加随机数防止缓存
+	        type: "post",
+	        dataType: "json",
+	        success: function (data) {
+	            // 使用initGeetest接口
+	            // 参数1：配置参数
+	            // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它做appendTo之类的事件
+	            initGeetest({
+	                gt: data.gt,
+	                challenge: data.challenge,
+	                product: "float", // 产品形式，包括：float，embed，popup。注意只对PC版验证码有效
+	                offline: !data.success // 表示用户后台检测极验服务器是否宕机，一般不需要关注
+	                // 更多配置参数请参见：http://www.geetest.com/install/sections/idx-client-sdk.html#config
+	            }, handlerPopup);
+	        }
+	    });
+    </script>
+</body>
+
+</html>

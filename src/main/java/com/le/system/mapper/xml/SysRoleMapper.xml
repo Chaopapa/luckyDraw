@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.le.system.mapper.SysRoleMapper">
+
+    <!-- 查询用户信息 -->
+    <select id="findRolesByUserId" resultType="com.le.system.entity.SysRole">
+        SELECT
+            r.id,
+            r.name,
+            r.role
+        FROM
+            sys_role r
+        LEFT JOIN sys_user_role ur ON r.id = ur.role_id
+        WHERE
+            1 = 1
+        AND
+            ur.user_id = #{userId}
+    </select>
+    <select id="findUserRole" resultType="com.le.system.entity.SysRole">
+        select r.id,r.name,r.role
+        from sys_role r join sys_user_role ur
+        where ur.user_id=#{userId}
+    </select>
+
+</mapper>

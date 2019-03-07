@@ -1,0 +1,247 @@
+.x-row{
+    overflow: hidden;
+}
+.x-row-cols{
+    display: block;
+    float: left;
+    height: 100%;
+}
+.dr .x-row-cols{
+    display: block;
+    float: right;
+    height: 100%;
+}
+.x-row-cols:last-child{
+    float: none;
+}
+.x-row-cols.last-child{
+    float: none;
+}
+.x-row.boxflex{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -o-box;
+    display: box;
+    float: none;
+    width: 100%;
+}
+.boxflex .x-row-cols{
+    display: block;
+    -webkit-box-flex: 1;
+    -moz-box-flex: 1;
+    box-flex: 1;
+    float: none;
+    width:100%;
+}
+
+
+.has-error .chosen-container a{
+	border-color: #ed5565;
+}
+
+.has-error.checkbox .error{
+	margin-left: -20px;
+}
+
+.has-error .dropDownSearch .form-control{
+	z-index: 3!important;
+}
+
+.chosen-container-single .chosen-single span{
+	font-size: 14px;
+	color:#676a6c;
+}
+
+/*日历组件*/
+.datatime{
+	background: url(../component/dateTime/img/icon.png) right #fff no-repeat!important;
+}
+
+.edui-editor-messageholder{
+	display: none!important;
+}
+
+.chosen-container .chosen-drop{
+	border-left: 1px solid #1ab394!important;
+	border-right: 1px solid #1ab394!important;
+	border-bottom: 1px solid #1ab394!important;
+}
+
+.chosen-container-single .chosen-single:hover{
+	border-color: #1ab394 !important;
+}
+
+.chosen-container-active.chosen-with-drop .chosen-single,.chosen-container-active .chosen-choices{
+	border: 1px solid #1ab394!important;
+	box-shadow: 0px 0px 0px rgba(0,0,0,0)!important;
+}
+
+.checkbox label,.radio label{
+	-moz-user-select:none;/*火狐*/
+	-webkit-user-select:none;/*webkit浏览器*/
+	-ms-user-select:none;/*IE10*/
+	-khtml-user-select:none;/*早期浏览器*/
+	user-select:none;
+}
+
+/*下拉树*/
+.input-group input[readonly]{
+	background: none;
+}
+.input-group .btn{
+	margin-bottom: 0!important;
+}
+.input-group .input-group-btn button{
+	margin-left: -1px;
+	border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    z-index: 2;
+}
+
+/*table面板样式*/
+.ibox.table-panel{
+	margin-bottom: 0!important;
+}
+.ibox.table-panel:after,.form-inline:after{
+	content: '';
+	display: block;
+	width: 100%;
+	height: 0;
+	font-size: 0;
+	clear: both;
+}
+.ibox.table-panel .ibox-content{
+	padding:5px 0px 0px 0px!important;
+}
+.ibox.table-panel .ibox-content .x-row{
+	overflow: visible;
+	position: relative;
+}
+.ibox.table-panel .ibox-content label.control-label{
+	display: block;
+	width: 75px;
+	text-overflow: ellipsis; 
+	white-space: nowrap; 
+	overflow: hidden;
+	text-align: right;
+	position: relative;
+	padding-top: 10px;
+	float: left;
+}
+
+.ibox.table-panel .ibox-content .control-content{
+	margin-left: 75px;
+	padding-left: 15px;
+	min-height: 35px;
+}
+
+.ibox.table-panel .ibox-content .form-group{
+	padding-bottom: 5px;
+	margin-bottom: 0!important;
+	float: left;
+}
+.ibox.table-panel .ibox-content .radio,.ibox.table-panel .ibox-content .checkbox{
+	padding-top: 10px;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.ibox.table-panel .dropdown-menu-right{
+	padding-right: 0px!important;
+}
+.ibox.table-panel .form-inline .input-group .input-group-btn{
+	width: 1%!important;
+}
+
+.radio label,.checkbox label{
+	color: #676a6c;
+	font-size:14px;
+	line-height:16px;
+}
+.radio label::before,
+.checkbox label::before{
+	outline: none!important;
+}
+
+@media(min-width: 768px){
+	.ibox.table-panel .form-inline .checkbox,.ibox.table-panel .form-inline .radio {
+	    padding-left: 8px!important;
+	}
+}
+
+.search-con{
+	min-width:240px;
+	margin-top:15px;
+}
+
+.search-lable{
+	display:block;
+	float:left;
+	margin-right:8px;
+	font-size:1.1em;
+	color:#676a6c;
+	font-weight:bold;
+	text-align: center;
+	line-height:2.2;
+	text-align: right;
+}
+.search-input{
+	/*width: calc( 100% - 80px ) !important;*/
+	min-width:120px;
+}
+.m-search{
+	margin-left:-15px;
+}
+.searchFlag{
+	margin-right:20px;
+}
+#searchTool{
+	margin-left: 0;
+}    
+.search-lable {
+    text-align: left;
+    margin-left: -15px;
+    margin-right: 0;
+    padding-right: 10px;
+}
+.clearfix {
+    clear: both;
+    height: 5px;
+    width: 100%;
+    font-size: 5px;
+    line-height: 5px;
+    visibility: hidden;
+}
+
+/*组件hover样式*/
+.form-control:hover{
+	transition: border-color 0s;
+    border-color: #1ab394 !important;
+}
+.input-group:hover .form-control{
+	transition: border-color 0s;
+	border-left-color: #1ab394!important;
+	border-top-color: #1ab394!important;
+	border-bottom-color: #1ab394!important;
+	border-right-color: #e5e6e7!important;
+}
+.input-group .form-control:focus{
+	transition: border-color 0s;
+	border-color: #1ab394!important;
+}
+.input-group:hover .input-group-btn button{
+	transition: border-color 0s;
+	border-color: #1ab394!important;
+}
+.checkbox:hover label,.radio:hover label{
+	color: #1ab394 !important;
+}
+.checkbox:hover label:before,.radio:hover label:before{
+	transition: border-color 0s;
+	border-color: #1ab394 !important;
+}
+
+@media ( min-width : 768px) {
+	.form-col2 >div[class^=col-]:nth-of-type(2n+1){
+		clear: both;
+	}
+}

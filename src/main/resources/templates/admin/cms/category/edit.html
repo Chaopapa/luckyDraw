@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+    [@le.head _title="内容分类编辑"]
+    [/@le.head]
+    <body class="container-fluid">
+    <p></p>
+    <form id="form" method="post" action="editData" component="bootstrapvalidator" class="form-horizontal row form-col2" bv-success="bvSuccess">
+        <input type="hidden" name="id" class="form-control" value="${category.id}">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label col-sm-3">分类名称:</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" name="name" value="${category.name}" placeholder="请输入分类名称" required maxlength="30" />
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label col-sm-3">是否显示:</label>
+                <div class="col-sm-9">
+                    <select class="form-control" name="enabled" required>
+                        <option value="${category.enabled}">[#if category.enabled=='1']是[/#if][#if category.enabled=='0']否[/#if]</option>
+                        <option value="0">否</option>
+                        <option value="1">是</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <label class="control-label col-sm-3">排序:</label>
+                <div class="col-sm-9">
+                   <input type="number" class="form-control" name="sort" value="${category.sort}" placeholder="请输入排序号" required maxlength="11" min="0"/>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-sm-6">
+            <div class="form-group">
+                <div class="col-sm-9 col-sm-offset-3">
+                    <button type="submit" id="add" class="btn btn-primary">提交</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script id="script">
+
+        function usernameValidate(jqForm, vdom) {
+        }
+
+        //提交返回参数
+        function success(data) {
+            if (data.data.respCode == "0000") {
+                System.parent.System.alert({
+                    title: '数据编辑',
+                    text: '操作成功',
+                    type: 'success'
+                })
+                closewindow();
+                System.parent.refreshData();
+            } else {
+                System.alert({
+                    title: '数据编辑',
+                    text: '操作失败',
+                    type: 'error'
+                })
+            }
+        }
+        //关闭当前页
+        function closewindow() {
+            System.closeThisWindow();
+        }
+    </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

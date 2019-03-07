@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+[@le.head]
+[/@le.head]
+<body>
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <h5 id="titleTxt">信息<small class="m-l-sm"></small></h5>
+        <div class="ibox-tools">
+            <a class="collapse-link" style="display:none;">
+                <i class="fa fa-chevron-up"></i>
+            </a>
+        </div>
+    </div>
+    <div class="ibox-content">
+        <form id="form" component="form2"  class="form-horizontal"  >
+            <ul class="tablePanel">
+                <li>
+                    <label>文章标题:</label>
+                    <input type="text" class="form-control search-input" style="width:200px;" id="username" value="" name="name" placeholder="请输入文章标题"/>
+                </li>
+                <li>
+                    <label>是否显示:</label>
+                    <select class="form-control" name="enabled">
+                        <option value="">==请选择==</option>
+                        <option value="1">是</option>
+                        <option value="0">否</option>
+                    </select>
+                </li>
+                <li>
+                    <label>分类名称:</label>
+                    <select class="form-control" name="categoryName">
+                        <option value="">==请选择==</option>
+                        [#list list as c1]
+                        <option value="${c1.name}">${c1.name}</option>
+                        [/#list]
+                    </select>
+                </li>
+                <li>
+                    <button type="button" class="btn btn-success" onclick="m_search();">
+                        <i class="glyphicon glyphicon-search"></i> 搜索
+                    </button>
+                    <button type="button" class="btn btn-primary" onclick="m_reset();">
+                        <i class="glyphicon glyphicon-remove"></i> 重置
+                    </button>
+                </li>
+            </ul>
+        </form>
+        <table id="table"
+               component="table"
+               class="table-striped"
+               table-url = 'page'
+               data-search-from="form"
+               data-search="false"
+               data-show-refresh="true"
+               data-show-toggle="true"
+               data-show-columns="true"
+               data-show-export="false"
+               data-refresh-callback="refresh"
+               data-load-callback="loadback"
+               data-height="100%"
+               data-search="true"
+               dataType="1"
+               data-dataList="json"
+               data-page-list="[5,10]"
+               data-ajaxType="json"
+               data-remove-callback="remove"
+               data-checkbox="true"
+               data-search-callback=""
+               data-BeforeDel="beforeDel"
+               data-add-callback="add"
+               data-operation='{"remove":{icon:"remove","event":"click",class:"remove",eventFun:"removeEve"}}'>
+            <thead>
+            <tr>
+                <th data-field="name" data-align='center'>文章标题</th>
+                <th data-field="categoryName" data-align='center'>分类名称</th>
+                <th data-field="enabled" data-align='center' data-formatter="publish"
+                    data-formatter-list='[{key:"1",value:" 是"},{key:"0",value:"否"}]'>
+                    是否显示
+                </th>
+                <th data-field="active" data-align="center" data-formatter="publish"
+                    data-formatter-list='[{key:"1",value:"是"},{key:"0",value:"否"}]'>
+                    是否轮播</th>
+                <th data-field="author" data-align='center'>作者</th>
+                <th data-field="source" data-align='center'>来源</th>
+                <th data-field="createDate" data-align='center'>创建时间</th>
+                <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"
+                    data-width="250" data-align='center'>操作</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+</body>
+</html>
+	<script type="text/javascript">
+        //所有的js执行程序必须在webReady执行之后才能执行
+        var webReady = function(){
+
+        }
+
+        function m_search(){
+            var $table = System.getComponent('#table');
+            $table.quickSearch();
+        }
+
+        function m_reset(){
+            var $table = System.getComponent('#table');
+            $table.quickReset();
+        }
+
+        //添加
+        function add(){
+            System.openWindow({
+                id:'add',
+                title:'添加信息',
+                url:'edit',
+                width:'100%',
+                height:'100%',
+                maxmin:true
+            });
+        }
+
+        //删除
+        function remove(data) {
+            var checkNodes = '';
+            for(var i = 0; i < data.length; i++) {
+                if(checkNodes == '') {
+                    checkNodes = data[i].id;
+                } else {
+                    checkNodes = checkNodes + ',' + data[i].id;
+                }
+            }
+            System.confirm({
+                title: '系统提示',
+                text: '是否确认删除?',
+                type: 'warning',
+                callback: function(bool) {
+                    if(bool) {
+                        $.ajax({
+                            url: "del",
+                            type: "get",
+                            data: {ids: checkNodes},
+                            dataType: "json",
+                            success: function(data) {
+                                if(data.respCode == '0000') {
+                                    System.alert({
+                                        title: '删除操作',
+                                        text: '删除成功',
+                                        type: 'success'
+                                    })
+                                    refreshData();
+                                } else {
+                                    System.alert({
+                                        title: '删除操作',
+                                        text: data.respMsg,
+                                        type: 'error'
+                                    })
+                                }
+                            },
+                            error: function() {
+                                System.alert({
+                                    title: '系统提示',
+                                    text: '请求错误，请检查',
+                                    type: 'error'
+                                })
+                            }
+                        });
+                    }
+                }
+            })
+        }
+
+        //操作栏
+        function operateFormatter(value, row, index) {
+            var list = [];
+            list.push('<a class="edit" href="javascript:void(0)" title="修改"><i class="fa fa-edit"></i>修改</a>  ');
+            return list.join('');
+        }
+
+        /*点击操作按钮时候的获取当前行数据的事件*/
+        window.operateEvents = {
+            'click .edit': function(e, value, row, index) {
+                System.openWindow({
+                    id: 'modify',
+                    title: '修改',
+                    url: 'edit?id=' + row.id + "&",
+                    width: '100%',
+                    height: '100%',
+                    maxmin: true
+                });
+            }
+        };
+
+        //刷新数据
+        function refreshData(){
+            $("#table").bootstrapTable("refresh");
+        }
+    </script>
