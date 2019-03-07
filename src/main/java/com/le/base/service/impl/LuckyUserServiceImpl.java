@@ -2,6 +2,7 @@ package com.le.base.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.collection.CollectionUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.le.base.entity.LuckyUser;
 import com.le.base.entity.dto.AisheliOrderDto;
@@ -20,7 +21,7 @@ import java.util.Random;
 public class LuckyUserServiceImpl extends ServiceImpl<LuckyUserMapper, LuckyUser> implements ILuckyUserService {
 
     @Override
-    public String doDrawAndSaveUser(List<AisheliOrderDto> orders) {
+    public String doDrawAndSaveUser(List<AisheliOrderDto> orders, Long ruleId) {
         Collections.shuffle(orders);
         Random random= new Random();
         int index = random.nextInt(orders.size());
@@ -30,10 +31,17 @@ public class LuckyUserServiceImpl extends ServiceImpl<LuckyUserMapper, LuckyUser
         luckyUser.setAddress(dto.getA())
                 .setNo(dto.getO())
                 .setName(dto.getN())
-                .setPhone(dto.getP());
+                .setPhone(dto.getP())
+                .setRuleId(ruleId);
         save(luckyUser);
         log.info("lucky no :" + dto.getO());
         return dto.getO();
+    }
+
+    @Override
+    public List<LuckyUser> getByRuleId(Long ruleId) {
+        List<LuckyUser> list = this.list(new QueryWrapper<LuckyUser>().lambda().eq(LuckyUser::getRuleId, ruleId));
+        return list;
     }
 
 }
