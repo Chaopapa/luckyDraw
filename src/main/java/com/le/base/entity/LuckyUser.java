@@ -41,5 +41,10 @@ public class LuckyUser extends SuperEntity {
      */
     private String address;
 
+    /**
+     * 规则id
+     */
+    private Long ruleId;
+
 }
 
