@@ -67,14 +67,14 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
             }
         }
 
-        //如果有同时间段的任务进行拦截
+        //如果有同时间段的抽奖活动进行拦截
         Map<String,Object> map = new HashMap<>();
-        map.put("startTime",luckyRule.getLimitBeginDate());
+        map.put("startTime",luckyRule.getBeginDate());
         map.put("endTime",luckyRule.getEndDate());
 
        LuckyRule rule =baseMapper.selectActivityByTime(map);
        if(rule!=null){
-           return R.error("抽奖时间与活动"+"【"+rule.getName()+"】"+"时间冲突");
+           return R.error("抽奖时间区间与活动"+"【"+rule.getName()+"】"+"时间冲突");
 
        }
 
