@@ -5,6 +5,8 @@ import com.le.core.base.SuperEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 
@@ -44,6 +46,7 @@ public class LuckyUser extends SuperEntity {
     /**
      * 中奖时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date luckyDate;
 
 

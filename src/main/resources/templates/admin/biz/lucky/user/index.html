@@ -11,12 +11,12 @@
         <form id="form" component="form2"  class="form-horizontal"  >
             <ul class="tablePanel">
                 <li>
-                    <label>用户账号:</label>
-                    <input type="text" class="form-control search-input" style="width:200px;" id="username" value="" name="username" placeholder="请输入用户账号"/>
+                    <label>用户名称:</label>
+                    <input type="text" class="form-control search-input" style="width:200px;" id="name" value="" name="name" placeholder="请输入中奖用户名称"/>
                 </li>
                 <li>
-                    <label>名称:</label>
-                    <input type="text" class="form-control search-input" style="width:200px;" id="name" value="" name="name" placeholder="请输入名称"/>
+                    <label>用户手机号:</label>
+                    <input type="text" class="form-control search-input" style="width:200px;" id="phone" value="" name="phone" placeholder="请输入中奖用户手机号"/>
                 </li>
                 <li>
                     <button type="button" class="btn btn-success" onclick="m_search();">
@@ -51,12 +51,13 @@
                data-search-callback=""
                data-BeforeDel="beforeDel"
                data-add-callback="add"
-               data-operation='{"remove":{icon:"remove","event":"click",class:"remove",eventFun:"removeEve"}}'>
+               data-operation='{"remove":{icon:"remove","event":"click",class:"remove",eventFun:"removeEve"}}'
+                data-show-curd="false">
             <thead>
             <tr>
-                <th data-field="name" data-align='center'>用户名</th>
-                <th data-field="phone" data-align='center'>手机号</th>
-                <th data-field="address" data-align='center'>地址</th>
+                <th data-field="name" data-align='center'>中奖用户名称</th>
+                <th data-field="phone" data-align='center'>中奖用户手机号</th>
+                <th data-field="address" data-align='center'>中奖用户地址</th>
                 <th data-field="luckyDate" data-align='center'>中奖时间</th>
                 <th data-field="no" data-align='center'>中奖订单号</th>
                 <th data-field="operate" data-formatter="operateFormatter" data-events="operateEvents"
@@ -132,7 +133,7 @@
         //操作栏
         function operateFormatter(value, row, index) {
             var list = [];
-            list.push('<a class="edit" href="javascript:void(0)" title="修改"><i class="fa fa-edit"></i>修改</a>  ');
+            list.push('<a class="edit" href="javascript:void(0)" title="查看详情"><i class="fa fa-edit"></i>查看详情</a>  ');
             return list.join('');
         }
 
@@ -141,7 +142,7 @@
             'click .edit': function(e, value, row, index) {
                 System.openWindow({
                     id: 'modify',
-                    title: '修改',
+                    title: '详情',
                     url: 'edit?id=' + row.id + "&",
                     width: '60%',
                     height: '60%',

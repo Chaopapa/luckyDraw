@@ -1,5 +1,6 @@
 package com.le.base.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -12,6 +13,7 @@ import com.le.base.mapper.LuckyUserMapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.le.base.service.ILuckyUserService;
 import com.le.core.rest.R;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -51,6 +53,16 @@ public class LuckyUserServiceImpl extends ServiceImpl<LuckyUserMapper, LuckyUser
     @Override
     public R findPage(Page<LuckyUser> pagination, LuckyUser search) {
         QueryWrapper<LuckyUser> qw = new QueryWrapper<>();
+
+
+
+        if(StrUtil.isNotBlank(search.getName())){
+            qw.like("name",search.getName());
+        }
+
+        if(StrUtil.isNotBlank(search.getPhone())){
+            qw.like("phone",search.getPhone());
+        }
 
         IPage<LuckyUser> page = baseMapper.selectPage(pagination, qw);
 
