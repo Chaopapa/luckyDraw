@@ -22,6 +22,11 @@ import java.util.Date;
 public class LuckyUser extends SuperEntity {
 
     /**
+     * 中奖订单号
+     */
+    private String no;
+
+    /**
      * 中奖用户名称
      */
     private String name;
