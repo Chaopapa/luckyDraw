@@ -9,13 +9,12 @@
         <result column="name" property="name" />
         <result column="phone" property="phone" />
         <result column="address" property="address" />
-        <result column="lucky_date" property="luckyDate" />
         <result column="no" property="no" />
     </resultMap>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
         id, create_date, modify_date,
-        name, phone, address, lucky_date, no
+        name, phone, address, no
     </sql>
 </mapper>

@@ -48,11 +48,6 @@ public class LuckyUser extends SuperEntity {
      */
     private Long ruleId;
 
-    /**
-     * 中奖时间
-     */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date luckyDate;
 
 
 }

@@ -1,5 +1,6 @@
 package com.le.base.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -35,10 +36,13 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
     @Override
     public R findPage(Page<LuckyRule> pagination, LuckyRule search) {
         QueryWrapper<LuckyRule> qw = new QueryWrapper<>();
+        if (StrUtil.isNotBlank(search.getName())) {
+            qw.like("name", search.getName());
+        }
 
         IPage<LuckyRule> page = baseMapper.selectPage(pagination, qw);
 
-        if(page == null){
+        if (page == null) {
             return R.empty();
         }
         return R.success(page);
@@ -46,42 +50,38 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
 
     public R editData(LuckyRule luckyRule) {
 
-        if(luckyRule.getLimitEndDate()!=null&&luckyRule.getLimitBeginDate()==null){
-            return R.error("填入订单结束时间时，请先填写订单开始时间");
+        if (luckyRule.getLimitEndDate().compareTo(luckyRule.getLimitBeginDate()) < 0) {
+            return R.error("订单的结束时间不能早于订单的开始时间");
         }
-        if(luckyRule.getEndDate()!=null&&luckyRule.getBeginDate()==null){
-            return R.error("填入抽奖结束时间时，请先填写抽奖开始时间");
-        }
-
-        if(luckyRule.getLimitEndDate()!=null){
-
-            if(luckyRule.getLimitEndDate().compareTo(luckyRule.getLimitBeginDate())<0){
-               return R.error("订单的结束时间不能早于订单的开始时间");
-            }
-        }
-        if(luckyRule.getEndDate()!=null){
-
-            if(luckyRule.getEndDate().compareTo(luckyRule.getBeginDate())<0){
-                return R.error("抽奖的结束时间不能早于抽奖的开始时间");
-
-            }
-        }
-        if(luckyRule.getBeginDate()!=null&&luckyRule.getLimitBeginDate()!=null){
-            if(luckyRule.getBeginDate().compareTo(luckyRule.getLimitBeginDate())<0){
-                return R.error("抽奖的开始时间不能早于订单的开始时间");
-            }
+        if (luckyRule.getEndDate().compareTo(luckyRule.getBeginDate()) < 0) {
+            return R.error("抽奖的结束时间不能早于抽奖的开始时间");
         }
 
-        if(luckyRule.getLimitMinPrice()!=null&&luckyRule.getLimitMaxPrice()!=null){
+        if (luckyRule.getBeginDate().compareTo(luckyRule.getLimitBeginDate()) < 0) {
+            return R.error("抽奖的开始时间不能早于订单的开始时间");
+        }
+        if (luckyRule.getLimitMinPrice() != null && luckyRule.getLimitMaxPrice() != null) {
 
-            if(luckyRule.getLimitMaxPrice().compareTo(luckyRule.getLimitMinPrice())<0){
+            if (luckyRule.getLimitMaxPrice().compareTo(luckyRule.getLimitMinPrice()) < 0) {
                 return R.error("订单的最大金额不能小于最小金额");
             }
         }
 
+        //如果有同时间段的任务进行拦截
+        Map<String,Object> map = new HashMap<>();
+        map.put("startTime",luckyRule.getLimitBeginDate());
+        map.put("endTime",luckyRule.getEndDate());
+
+       LuckyRule rule =baseMapper.selectActivityByTime(map);
+       if(rule!=null){
+           return R.error("抽奖时间与活动"+"【"+rule.getName()+"】"+"时间冲突");
+
+       }
+
         saveOrUpdate(luckyRule);
         return R.success();
     }
+
     private static Map<String, LuckyRule> ruleMap = new HashMap<>();
 
     @Override
@@ -91,7 +91,7 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
         LuckyRule luckyRule = null;
         if (ruleMap == null || ruleMap.size() == 0) {
             luckyRule = searchByDate(now);
-            if(luckyRule == null){
+            if (luckyRule == null) {
                 return null;
             }
             String beginDate = DateUtil.formatDateTime(luckyRule.getBeginDate());
@@ -110,7 +110,7 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
                     break;
                 } else {
                     luckyRule = searchByDate(now);
-                    if(luckyRule == null){
+                    if (luckyRule == null) {
                         return null;
                     }
                     it.remove();

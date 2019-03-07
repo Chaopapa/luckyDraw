@@ -84,4 +84,5 @@ public class LuckyUserServiceImpl extends ServiceImpl<LuckyUserMapper, LuckyUser
         saveOrUpdate(bizLuckyUser);
         return R.success();
     }
+
 }

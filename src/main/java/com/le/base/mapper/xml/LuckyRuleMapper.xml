@@ -36,6 +36,14 @@
         AND
           end_date
     </select>
+    <select id="selectActivityByTime" resultType="com.le.base.entity.LuckyRule">
+        select name from biz_lucky_rule where
+        (begin_date>=#{map.startTime} and  begin_date &lt;=#{map.endTime})
+        or
+        (end_date>=#{map.startTime} and end_date &lt;=#{map.endTime})
+
+
+    </select>
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">

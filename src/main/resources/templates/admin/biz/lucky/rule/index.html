@@ -11,12 +11,8 @@
         <form id="form" component="form2"  class="form-horizontal"  >
             <ul class="tablePanel">
                 <li>
-                    <label>用户账号:</label>
-                    <input type="text" class="form-control search-input" style="width:200px;" id="username" value="" name="username" placeholder="请输入用户账号"/>
-                </li>
-                <li>
                     <label>名称:</label>
-                    <input type="text" class="form-control search-input" style="width:200px;" id="name" value="" name="name" placeholder="请输入名称"/>
+                    <input type="text" class="form-control search-input" style="width:200px;" id="name" value="" name="name" placeholder="请输入活动名称"/>
                 </li>
                 <li>
                     <button type="button" class="btn btn-success" onclick="m_search();">
@@ -54,6 +50,7 @@
                data-operation='{"remove":{icon:"remove","event":"click",class:"remove",eventFun:"removeEve"}}'>
             <thead>
             <tr>
+                <th data-field="name" data-align='center'>活动名称</th>
                 <th data-field="limitBeginDate" data-align='center'>订单开始时间</th>
                 <th data-field="limitEndDate" data-align='center'>订单结束时间</th>
                 <th data-field="beginDate" data-align='center'>抽奖开始时间</th>

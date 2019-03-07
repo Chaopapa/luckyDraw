@@ -37,5 +37,4 @@ public interface ILuckyUserService extends IService<LuckyUser> {
      * @return
      */
     R editData(LuckyUser luckyUser);
-    String doDrawAndSaveUser(List<AisheliOrderDto> orders);
 }
