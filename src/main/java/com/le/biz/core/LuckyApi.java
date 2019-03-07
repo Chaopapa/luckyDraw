@@ -1,15 +1,11 @@
 package com.le.biz.core;
 
-import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpUtil;
-import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.le.base.entity.LuckyRule;
 import com.le.base.service.ILuckyRuleService;
-import com.le.biz.TokenValidatorHandler;
 import com.le.core.rest.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +23,7 @@ import java.util.Map;
  * @Version V1.0
  **/
 @RestController
-@RequestMapping("/biz/lucky")
+@RequestMapping("/templates/admin/biz/lucky")
 public class LuckyApi {
 
     @Autowired

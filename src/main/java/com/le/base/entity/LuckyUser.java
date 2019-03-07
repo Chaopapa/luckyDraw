@@ -46,5 +46,6 @@ public class LuckyUser extends SuperEntity {
      */
     private Date luckyDate;
 
+
 }
 

@@ -1,10 +1,12 @@
 package com.le.base.entity;
 
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.le.core.base.SuperEntity;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -25,21 +27,25 @@ public class LuckyRule extends SuperEntity {
     /**
      * 限制订单开始时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date limitBeginDate;
 
     /**
      * 限制订单结束时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date limitEndDate;
 
     /**
      * 抽奖开始时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date beginDate;
 
     /**
      * 抽奖结束时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endDate;
 
     /**
@@ -53,12 +59,12 @@ public class LuckyRule extends SuperEntity {
     private BigDecimal limitMaxPrice;
 
     /**
-     * 限制单号 0 不可重复抽 1 可重复抽
+     * 是否限制单号 0 不可重复抽 1 可重复抽
      */
     private Boolean limitNo;
 
     /**
-     * 限制手机号 0 不可重复抽 1 可重复抽
+     * 是否限制手机号 0 不可重复抽 1 可重复抽
      */
     private Boolean limitPhone;
 

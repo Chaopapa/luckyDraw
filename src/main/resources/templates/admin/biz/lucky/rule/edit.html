@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    [@le.head _title="编辑"]
+    [/@le.head]
+<body class="container-fluid">
+<p></p>
+<form id="form" method="post" action="editData" component="bootstrapvalidator" class="form-horizontal row form-col2">
+    <input type="hidden" name="id" class="form-control" value="${luckyRule.id}">
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">订单开始时间:</label>
+            <div class="col-sm-8">
+                <input component="dateTime" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" type="text" class="form-control" name="limitBeginDate"  value='[#if luckyRule.limitBeginDate??]${luckyRule.limitBeginDate?datetime}[#else][/#if]' placeholder="请输入订单开始时间" required />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">订单结束时间:</label>
+            <div class="col-sm-8">
+                <input component="dateTime"type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control" name="limitEndDate" value='[#if luckyRule.limitEndDate??]${luckyRule.limitEndDate?datetime}[#else][/#if]' placeholder="请输入订单结束时间" required />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">抽奖开始时间:</label>
+            <div class="col-sm-8">
+                <input component="dateTime" type="text" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" class="form-control" name="beginDate" value='[#if luckyRule.beginDate??]${luckyRule.beginDate?datetime}[#else][/#if]' placeholder="请输入抽奖开始时间" required />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">抽奖结束时间:</label>
+            <div class="col-sm-8">
+                <input component="dateTime" type="text" class="form-control" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})" name="endDate"  value='[#if luckyRule.endDate??]${luckyRule.endDate?datetime}[#else][/#if]' placeholder="请输入抽奖结束时间" required />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">订单最小金额:</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="limitMinPrice" value="${luckyRule.limitMinPrice}" placeholder="请输入订单最小金额" required />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">订单最大金额:</label>
+            <div class="col-sm-8">
+                <input type="text" class="form-control" name="limitMaxPrice" value="${luckyRule.limitMaxPrice}" placeholder="请输入订单最大金额" required />
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">是否限制单号:</label>
+            <div class="col-sm-8">
+                <select class="form-control" name="limitNo">
+                    <option value="${luckyRule.limitNo}">[#if luckyRule.limitNo==true]是[/#if][#if luckyRule.limitNo==false]否[/#if]</option>
+                    <option value="true">是</option>
+                    <option value="false">否</option>
+                </select>
+
+            </div>
+
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <label class="control-label col-sm-4">是否限制手机号:</label>
+            <div class="col-sm-8">
+                <select class="form-control" name="limitPhone">
+                    <option value="${luckyRule.limitPhone}">[#if luckyRule.limitPhone==true]是[/#if][#if luckyRule.limitPhone==false]否[/#if]</option>
+                    <option value="true">是</option>
+                    <option value="false">否</option>
+                </select>
+
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="col-sm-6">
+        <div class="form-group">
+            <div class="col-sm-8 col-sm-offset-4">
+                <button type="submit" id="add" class="btn btn-primary">提交</button>
+            </div>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    //所有的js执行程序必须在webReady执行之后才能执行
+    var webReady = function () {
+
+    };
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
