@@ -2,6 +2,9 @@ package com.le.base.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.le.base.entity.LuckyUser;
+import com.le.base.entity.dto.AisheliOrderDto;
+
+import java.util.List;
 
 /**
  * @ClassName IUserService
@@ -12,4 +15,5 @@ import com.le.base.entity.LuckyUser;
  **/
 public interface ILuckyUserService extends IService<LuckyUser> {
 
+    String doDrawAndSaveUser(List<AisheliOrderDto> orders);
 }

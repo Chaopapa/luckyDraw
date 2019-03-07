@@ -13,4 +13,5 @@ import com.le.base.entity.LuckyRule;
  **/
 public interface ILuckyRuleService extends IService<LuckyRule> {
 
+    LuckyRule getByTime();
 }

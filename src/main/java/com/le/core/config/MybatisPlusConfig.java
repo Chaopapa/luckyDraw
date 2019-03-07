@@ -1,5 +1,6 @@
 package com.le.core.config;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,6 +19,7 @@ import com.baomidou.mybatisplus.extension.plugins.PerformanceInterceptor;
  * @Version V1.0
  **/
 @Configuration
+@MapperScan("com.le.**.mapper")
 public class MybatisPlusConfig {
 
     /**
@@ -37,13 +39,6 @@ public class MybatisPlusConfig {
         performanceInterceptor.setMaxTime(30000);
         performanceInterceptor.setFormat(true);
         return performanceInterceptor;
-    }
-
-    @Bean
-    public MapperScannerConfigurer mapperScannerConfigurer() {
-        MapperScannerConfigurer scannerConfigurer = new MapperScannerConfigurer();
-        scannerConfigurer.setBasePackage("com.le.**.mapper");
-        return scannerConfigurer;
     }
 
     /**
