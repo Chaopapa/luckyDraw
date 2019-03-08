@@ -23,6 +23,18 @@
         from  biz_lucky_user as u
         join biz_lucky_rule as r
         on u.rule_id=r.id
+        <where>
+            <if test="search.name!=null and search.name!=''">
+              and u.name like CONCAT ('%',#{search.name},'%')
+
+            </if>
+
+            <if test="search.phone!=null and search.phone!=''">
+                and u.phone like  CONCAT (#{search.phone},'%')
+            </if>
+
+
+        </where>
 
 
     </select>
