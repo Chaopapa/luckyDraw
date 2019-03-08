@@ -1,7 +1,10 @@
 package com.le.base.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.le.base.entity.LuckyRule;
 import com.le.base.entity.LuckyUser;
+import com.le.base.service.ILuckyRuleService;
 import com.le.base.service.ILuckyUserService;
 import com.le.core.rest.R;
 import com.le.core.util.HttpContextUtils;
@@ -31,6 +34,9 @@ import java.util.List;
 public class LuckyUserController {
     @Autowired
     private ILuckyUserService luckyUserService;
+
+    @Autowired
+    private ILuckyRuleService luckyRuleService;
 
     private static final String INDEX = "admin/biz/lucky/user/index";
 
@@ -71,7 +77,11 @@ public class LuckyUserController {
     public String edit(ModelMap model, Long id) {
         if (id != null) {
             LuckyUser luckyUser = luckyUserService.getById(id);
+            QueryWrapper<LuckyRule> qw = new QueryWrapper<>();
+            qw.eq("id",luckyUser.getRuleId());
+            LuckyRule luckyRule = luckyRuleService.getOne(qw);
             model.put("luckyUser", luckyUser);
+            model.put("luckyRule",luckyRule);
         }
         return EDIT;
     }
