@@ -17,10 +17,7 @@ import com.le.core.rest.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Slf4j
 /**
@@ -72,7 +69,8 @@ public class LuckyUserServiceImpl extends ServiceImpl<LuckyUserMapper, LuckyUser
             qw.like("phone",search.getPhone());
         }
 
-        IPage<LuckyUser> page = baseMapper.selectPage(pagination, qw);
+        List<LuckyUser> list = baseMapper.selectLuckyDog(search);
+        IPage<LuckyUser> page=pagination.setRecords(list);
 
         if(page == null){
             return R.empty();

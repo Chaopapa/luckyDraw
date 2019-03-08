@@ -71,6 +71,7 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
         Map<String,Object> map = new HashMap<>();
         map.put("startTime",luckyRule.getBeginDate());
         map.put("endTime",luckyRule.getEndDate());
+        map.put("id",luckyRule.getId());
 
        LuckyRule rule =baseMapper.selectActivityByTime(map);
        if(rule!=null){
@@ -79,6 +80,13 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
        }
 
         saveOrUpdate(luckyRule);
+
+
+        if(luckyRule.getId()!=null){
+
+
+
+        }
         return R.success();
     }
 

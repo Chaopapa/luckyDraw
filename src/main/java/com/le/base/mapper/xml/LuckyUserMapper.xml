@@ -10,6 +10,7 @@
         <result column="phone" property="phone" />
         <result column="address" property="address" />
         <result column="no" property="no" />
+        <result column="activityName" property="activityName"/>
     </resultMap>
 
     <!-- 通用查询结果列 -->
@@ -17,4 +18,12 @@
         id, create_date, modify_date,
         name, phone, address, no
     </sql>
+    <select id="selectLuckyDog" resultType="com.le.base.entity.LuckyUser">
+        select u.*,r.name as activityName
+        from  biz_lucky_user as u
+        join biz_lucky_rule as r
+        on u.rule_id=r.id
+
+
+    </select>
 </mapper>

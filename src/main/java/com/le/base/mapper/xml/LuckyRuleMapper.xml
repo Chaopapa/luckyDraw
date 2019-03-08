@@ -38,10 +38,24 @@
     </select>
     <select id="selectActivityByTime" resultType="com.le.base.entity.LuckyRule">
         select name from biz_lucky_rule where
-        (begin_date>=#{map.startTime} and  begin_date &lt;=#{map.endTime})
+        (begin_date>=#{map.startTime} and  begin_date &lt;=#{map.endTime}
+        <if test="map.id!=null">
+         and  id !=#{map.id}
+        </if>
+        )
+
         or
-        (end_date>=#{map.startTime} and end_date &lt;=#{map.endTime})
-        or(begin_date&lt;=#{startTime}and end_date>=#{map.endTime})
+        (end_date>=#{map.startTime} and end_date &lt;=#{map.endTime}
+        <if test="map.id!=null">
+            and  id !=#{map.id}
+        </if>
+        )
+        or(begin_date&lt;=#{map.startTime}and end_date>=#{map.endTime}
+        <if test="map.id!=null">
+            and id !=#{map.id}
+        </if>
+        )
+
 
 
     </select>
