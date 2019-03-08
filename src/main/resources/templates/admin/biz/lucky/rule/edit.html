@@ -50,7 +50,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">订单最小金额:</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" name="limitMinPrice" value="${luckyRule.limitMinPrice}" placeholder="请输入订单最小金额"  />
+                <input type="text"data-bv-numeric="true"  min="0"  class="form-control" name="limitMinPrice" value="${luckyRule.limitMinPrice}" placeholder="请输入订单最小金额"  />
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">订单最大金额:</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" name="limitMaxPrice" value="${luckyRule.limitMaxPrice}" placeholder="请输入订单最大金额"  />
+                <input type="text" data-bv-numeric="true" min="0" class="form-control" name="limitMaxPrice" value="${luckyRule.limitMaxPrice}" placeholder="请输入订单最大金额"  />
             </div>
         </div>
     </div>
