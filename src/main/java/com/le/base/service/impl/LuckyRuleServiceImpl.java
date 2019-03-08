@@ -15,6 +15,7 @@ import com.le.base.service.ILuckyRuleService;
 import com.le.core.rest.R;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <p>
@@ -47,7 +48,7 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
         }
         return R.success(page);
     }
-
+    @Transactional
     public R editData(LuckyRule luckyRule) {
 
         if (luckyRule.getLimitEndDate().compareTo(luckyRule.getLimitBeginDate()) < 0) {
@@ -83,8 +84,9 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
 
 
         if(luckyRule.getId()!=null){
-
-
+           if(luckyRule.getLimitMinPrice()==null||luckyRule.getLimitMaxPrice()==null){
+               baseMapper.setNullbyId(luckyRule,luckyRule.getId());
+            }
 
         }
         return R.success();

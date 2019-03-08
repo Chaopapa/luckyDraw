@@ -15,6 +15,23 @@
         <result column="limit_no" property="limitNo" />
         <result column="limit_phone" property="limitPhone" />
     </resultMap>
+    <update id="setNullbyId">
+
+        update
+
+        biz_lucky_rule
+        <set>
+
+        <if test="rule.limitMinPrice==null">
+            limit_min_price= null,
+        </if>
+        <if test="rule.limitMaxPrice==null">
+            limit_max_price=null
+        </if>
+        </set>
+        where id=#{id}
+
+    </update>
 
     <select id="searchByDate" resultType="com.le.base.entity.LuckyRule">
         SELECT
