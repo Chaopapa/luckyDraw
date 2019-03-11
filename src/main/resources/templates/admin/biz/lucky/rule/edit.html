@@ -64,7 +64,7 @@
     </div>
     <div class="col-sm-6">
         <div class="form-group">
-            <label class="control-label col-sm-4">是否限制单号:</label>
+            <label class="control-label col-sm-4">订单可重复抽奖:</label>
             <div class="col-sm-8">
                 <select class="form-control" name="limitNo">
                     <option value='[#if luckyRule.limitNo??]${luckyRule.limitNo}[#else]false[/#if]'>[#if luckyRule.limitNo==true]是[/#if] [#if luckyRule.limitNo==false]否[/#if]</option>
@@ -78,7 +78,7 @@
     </div>
     <div class="col-sm-6">
         <div class="form-group">
-            <label class="control-label col-sm-4">是否限制手机号:</label>
+            <label class="control-label col-sm-4">手机号可重复抽奖:</label>
             <div class="col-sm-8">
                 <select class="form-control" name="limitPhone">
                     <option value='[#if luckyRule.limitPhone??]${luckyRule.limitPhone}[#else]false[/#if]'>[#if luckyRule.limitPhone==true]是[/#if][#if luckyRule.limitPhone==false]否[/#if]</option>
