@@ -13,6 +13,7 @@ import com.le.base.entity.dto.AisheliOrderDto;
 import com.le.base.service.ILuckyRuleService;
 import com.le.base.service.ILuckyUserService;
 import com.le.biz.TokenValidatorHandler;
+import com.le.core.properties.LongeProperties;
 import com.le.core.rest.R;
 import com.le.core.rest.RCode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +40,9 @@ public class LuckyApi {
 
     @Autowired
     private ILuckyUserService luckyUserService;
+
+    @Autowired
+    private LongeProperties longeProperties;
 
     @GetMapping("get")
     public R getLuckyOne() {
@@ -78,7 +82,7 @@ public class LuckyApi {
             }
         }
         Long beginTime = new Date().getTime();
-        String orderStr = HttpUtil.post("http://192.168.100.13:8082/aisheli/oms/api/lucky/draw/getNo.jhtml", paramMap);
+        String orderStr = HttpUtil.post(longeProperties.getOrderUrl(), paramMap);
         Long totalConsumedTime = new Date().getTime() - beginTime;
         System.out.println("订单接口耗时：" + totalConsumedTime);
         if (StrUtil.isNotBlank(orderStr)) {

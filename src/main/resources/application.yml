@@ -58,6 +58,8 @@ mybatis-plus:
 logging:
     config: classpath:config/logback-longe.xml
     path: longe-logs
+longe:
+    orderUrl: http://192.168.100.190/aisheli/oms/api/lucky/draw/getNo.jhtml
 
 ---
 
