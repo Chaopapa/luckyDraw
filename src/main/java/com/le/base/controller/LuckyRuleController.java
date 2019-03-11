@@ -98,7 +98,9 @@ public class LuckyRuleController {
     @ResponseBody
     @RequiresPermissions("base:bizLuckyRule:edit")
     public R del(@RequestParam("ids") List<Long> ids){
-        luckyRuleService.removeByIds(ids);
+        luckyRuleService.removeRules(ids);
+       // luckyRuleService.removeByIds(ids);
+
         return R.success();
     }
 }

@@ -26,10 +26,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @since 2019-03-07
  */
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -96,6 +93,14 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
 
         }
         return R.success();
+    }
+
+    @Override
+    public void removeRules(List<Long> ids) {
+         baseMapper.deleteBatchIds(ids);
+         log.info("ruleMap:"+ruleMap);
+         ruleMap.clear();
+         log.info("ruleMap-"+ruleMap);
     }
 
     private static Map<String, LuckyRule> ruleMap = new HashMap<>();

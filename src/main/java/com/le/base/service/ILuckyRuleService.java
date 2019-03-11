@@ -6,6 +6,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.le.base.entity.LuckyRule;
 import com.le.core.rest.R;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类
@@ -32,4 +34,13 @@ public interface ILuckyRuleService extends IService<LuckyRule> {
      * @return
      */
     R editData(LuckyRule luckyRule);
+
+
+    /**
+     * 添加或修改
+     *
+     * @param ids 规则id
+     * @return
+     */
+    void removeRules(List<Long> ids);
 }
