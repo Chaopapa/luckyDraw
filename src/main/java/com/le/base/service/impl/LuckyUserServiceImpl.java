@@ -69,13 +69,13 @@ public class LuckyUserServiceImpl extends ServiceImpl<LuckyUserMapper, LuckyUser
             qw.like("phone",search.getPhone());
         }
 
-        List<LuckyUser> list = baseMapper.selectLuckyDog(search);
-        IPage<LuckyUser> page=pagination.setRecords(list);
+        List<LuckyUser> list = baseMapper.selectLuckyDog(pagination,search);
+        pagination.setRecords(list);
 
-        if(page == null){
+        if( pagination == null){
             return R.empty();
         }
-        return R.success(page);
+        return R.success( pagination);
     }
 
     public R editData(LuckyUser bizLuckyUser) {
