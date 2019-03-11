@@ -25,6 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @author Administrator
  * @since 2019-03-07
  */
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -50,6 +51,11 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
     }
     @Transactional
     public R editData(LuckyRule luckyRule) {
+
+        if(luckyRule.getLimitMinPrice()==null){
+            luckyRule.setLimitMinPrice(new  BigDecimal(0));
+        }
+
 
         if (luckyRule.getLimitEndDate().compareTo(luckyRule.getLimitBeginDate()) < 0) {
             return R.error("订单的结束时间不能早于订单的开始时间");
