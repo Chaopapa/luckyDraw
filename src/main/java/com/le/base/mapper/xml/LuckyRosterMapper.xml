@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.le.base.mapper.LuckyRosterMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.le.base.entity.LuckyRoster">
+        <result column="id" property="id" />
+        <result column="create_date" property="createDate" />
+        <result column="modify_date" property="modifyDate" />
+        <result column="no" property="no" />
+        <result column="name" property="name" />
+        <result column="phone" property="phone" />
+        <result column="address" property="address" />
+        <result column="seq" property="seq" />
+        <result column="type" property="type" />
+        <result column="ruleId" property="ruleId"/>
+        <result column="ruleName" property="ruleName"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, create_date, modify_date, 
+        no, name, phone, address, seq, type
+    </sql>
+    <select id="selectRoster" resultType="com.le.base.entity.LuckyRoster">
+        select o.*,r.name as ruleName from biz_lucky_roster as o
+        left join biz_lucky_rule as r
+        on r.id = o.rule_id
+        <where>
+            o.type=#{type}
+            <if test="search.no!=null and search.no!=''">
+                and  o.no=#{search.no}
+            </if>
+            <if test="search.name!=null and search.name!=''">
+                and  o.name like CONCAT('%',#{search.name},'%')
+            </if>
+            <if test="ruleId!=null">
+                and o.rule_id=#{ruleId}
+                and o.type=1
+            </if>
+
+        </where>
+        order by o.seq ASC ,o.create_date ASC
+    </select>
+
+</mapper>

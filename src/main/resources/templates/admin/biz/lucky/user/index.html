@@ -10,6 +10,17 @@
     <div class="ibox-content">
         <form id="form" component="form2"  class="form-horizontal"  >
             <ul class="tablePanel">
+                [#if ruleId==null]
+                <li>
+                    <label>活动名称:</label>
+                    <select type="text" name="ruleId" class="form-control search-input" >
+                        <option value=""></option>
+                        [#list ruleList as r]
+                        <option value="${r.id}">${r.name}</option>
+                        [/#list]
+                    </select>
+                </li>
+                [/#if]
                 <li>
                     <label>用户名称:</label>
                     <input type="text" class="form-control search-input" style="width:200px;" id="name" value="" name="name" placeholder="请输入中奖用户名称"/>
@@ -31,7 +42,7 @@
         <table id="table"
                component="table"
                class="table table-striped"
-               table-url = "page"
+               table-url = "page?rule=${ruleId}"
                data-search-from="form"
                data-search="false"
                data-show-refresh="true"

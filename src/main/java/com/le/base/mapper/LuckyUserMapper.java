@@ -10,5 +10,5 @@ import java.util.List;
 
 public interface LuckyUserMapper extends BaseMapper<LuckyUser> {
 
-    List<LuckyUser> selectLuckyDog(Page<LuckyUser> page, @Param("search") LuckyUser search);
+    List<LuckyUser> selectLuckyDog(Page<LuckyUser> page, @Param("search") LuckyUser search,@Param("ruleId")Long ruleId);
 }

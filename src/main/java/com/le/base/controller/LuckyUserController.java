@@ -50,7 +50,10 @@ public class LuckyUserController {
      */
     @RequestMapping({"/index", "/"})
     @RequiresPermissions("base:bizLuckyUser:view")
-    public String index(ModelMap model) {
+    public String index(ModelMap model,Long ruleId) {
+        List<LuckyRule> ruleList = luckyRuleService.list(null);
+        model.put("ruleList",ruleList);
+        model.put("ruleId",ruleId);
         return INDEX;
     }
 
@@ -61,9 +64,9 @@ public class LuckyUserController {
     @RequestMapping("/page")
     @ResponseBody
     @RequiresPermissions("base:bizLuckyUser:view")
-    public R page(LuckyUser search) {
+    public R page(LuckyUser search,Long rule) {
         Page<LuckyUser> page = HttpContextUtils.getPage();
-        return luckyUserService.findPage(page, search);
+        return luckyUserService.findPage(page, search,rule);
     }
 
     /**

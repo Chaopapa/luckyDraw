@@ -28,7 +28,7 @@ public interface ILuckyUserService extends IService<LuckyUser> {
      * @param search     搜索条件
      * @return
      */
-    R findPage(Page<LuckyUser> pagination, LuckyUser search);
+    R findPage(Page<LuckyUser> pagination, LuckyUser search,Long ruleId);
 
     /**
      * 添加或修改

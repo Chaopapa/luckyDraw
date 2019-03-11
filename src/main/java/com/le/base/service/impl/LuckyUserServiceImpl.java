@@ -56,20 +56,9 @@ public class LuckyUserServiceImpl extends ServiceImpl<LuckyUserMapper, LuckyUser
     }
 
     @Override
-    public R findPage(Page<LuckyUser> pagination, LuckyUser search) {
-        QueryWrapper<LuckyUser> qw = new QueryWrapper<>();
+    public R findPage(Page<LuckyUser> pagination, LuckyUser search,Long rule) {
 
-
-
-        if(StrUtil.isNotBlank(search.getName())){
-            qw.like("name",search.getName());
-        }
-
-        if(StrUtil.isNotBlank(search.getPhone())){
-            qw.like("phone",search.getPhone());
-        }
-
-        List<LuckyUser> list = baseMapper.selectLuckyDog(pagination,search);
+        List<LuckyUser> list = baseMapper.selectLuckyDog(pagination,search,rule);
         pagination.setRecords(list);
 
         if( pagination == null){

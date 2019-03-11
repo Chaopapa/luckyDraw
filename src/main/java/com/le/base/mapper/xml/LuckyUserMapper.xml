@@ -32,7 +32,12 @@
             <if test="search.phone!=null and search.phone!=''">
                 and u.phone like  CONCAT (#{search.phone},'%')
             </if>
-
+            <if test="search.ruleId!=null">
+                and u.rule_id=#{search.ruleId}
+            </if>
+            <if test="ruleId!=null">
+                and u.rule_id=#{ruleId}
+            </if>
 
         </where>
 
