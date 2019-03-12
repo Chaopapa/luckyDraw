@@ -73,4 +73,13 @@ public class LuckyRule extends SuperEntity {
      */
     private Boolean limitPhone;
 
+    /**
+     * 是否有中奖名单
+     */
+    private Boolean haveMenu;
+
+    /**
+     * 是否有黑名单
+     */
+    private Boolean haveBlacklist;
 }

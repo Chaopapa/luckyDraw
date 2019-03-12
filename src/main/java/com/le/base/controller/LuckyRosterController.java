@@ -34,6 +34,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin/biz/lucky/roster")
 public class LuckyRosterController {
+
     @Autowired
     private ILuckyRosterService luckyRosterService;
 
