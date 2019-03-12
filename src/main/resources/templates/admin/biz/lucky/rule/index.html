@@ -2,6 +2,9 @@
 <html>
 [@le.head]
 [/@le.head]
+<style>
+
+</style>
 <body class="container-fluid">
 <div class="ibox">
     <div class="ibox-heading">
@@ -38,6 +41,8 @@
                data-load-callback="loadback"
                data-height="100%"
                data-search="true"
+               data-mobile-responsive="false"
+
                dataType="1"
                data-dataList="json"
                data-page-list="[5,10]"
@@ -50,6 +55,7 @@
                data-operation='{"remove":{icon:"remove","event":"click",class:"remove",eventFun:"removeEve"}}'>
             <thead>
             <tr>
+
                 <th data-field="name" data-align='center'>活动名称</th>
                 <th data-field="limitBeginDate" data-align='center'>订单开始时间</th>
                 <th data-field="limitEndDate" data-align='center'>订单结束时间</th>
@@ -142,9 +148,9 @@
         //操作栏
         function operateFormatter(value, row, index) {
             var list = [];
-            list.push('<a class="edit" href="javascript:void(0)" title="修改"><i class="fa fa-edit"></i>修改</a>  ');
-            list.push('<a class="luckyUser" href="javascript:void(0)" title="中奖用户"><i class="fa fa-list">查看中奖用户</i></a>  ');
-            list.push('<a class="blacklist" href="javascript:void(0)" title="黑名单"><i class="fa fa-list">查看黑名单</i></a>  ');
+            list.push('<a class="edit btn" href="javascript:void(0)" title="修改"><i class="fa fa-edit"></i>修改</a>  ');
+            list.push('<a class="luckyUser btn" href="javascript:void(0)" title="中奖用户"><i class="fa fa-list">查看中奖用户</i></a>  ');
+            list.push('<a class="blacklist btn" href="javascript:void(0)" title="黑名单"><i class="fa fa-list">查看黑名单</i></a>  ');
             return list.join('');
         }
 
