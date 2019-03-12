@@ -24,7 +24,7 @@ public interface ILuckyRosterService extends IService<LuckyRoster> {
      * @param search     搜索条件
      * @return
      */
-    R findPage(Page<LuckyRoster> pagination, LuckyRoster search,Integer type,Long ruleId);
+    R findPage(Page<LuckyRoster> pagination, LuckyRoster search,Integer type,Long rule);
 
     /**
      * 添加或修改

@@ -11,6 +11,15 @@
         <form id="form" component="form2"  class="form-horizontal"  >
             <ul class="tablePanel">
                 <li>
+                    <label>活动名称:</label>
+                    <select type="text" name="ruleId" class="form-control search-input" >
+                        <option value=""></option>
+                        [#list ruleList as r]
+                        <option value="${r.id}">${r.name}</option>
+                        [/#list]
+                    </select>
+                </li>
+                <li>
                     <label>订单号:</label>
                     <input type="text" class="form-control search-input" style="width:200px;" id="no" value="" name="no" placeholder="请输入订单号"/>
                 </li>

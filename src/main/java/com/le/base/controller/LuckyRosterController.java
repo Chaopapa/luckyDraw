@@ -55,6 +55,9 @@ public class LuckyRosterController {
     @RequestMapping({"/index{type}", "/"})
     @RequiresPermissions("base:luckyRoster:view")
     public String index(ModelMap model, @PathVariable("type") RosterTypeEnum type,Long ruleId) {
+        List<LuckyRule> ruleList = luckyRuleService.list(null);
+        model.put("ruleList",ruleList);
+
         if(type.equals(RosterTypeEnum.Menu)){
             model.put("type",RosterTypeEnum.Menu);
             return MENU;
@@ -74,9 +77,9 @@ public class LuckyRosterController {
     @RequestMapping("/page{type}")
     @ResponseBody
     @RequiresPermissions("base:luckyRoster:view")
-    public R page(LuckyRoster search,@PathVariable("type")RosterTypeEnum type,Long ruleId) {
+    public R page(LuckyRoster search,@PathVariable("type")RosterTypeEnum type,Long rule) {
         Page<LuckyRoster> page = HttpContextUtils.getPage();
-        return luckyRosterService.findPage(page, search,type.getValue(),ruleId);
+        return luckyRosterService.findPage(page, search,type.getValue(),rule);
     }
 
     /**

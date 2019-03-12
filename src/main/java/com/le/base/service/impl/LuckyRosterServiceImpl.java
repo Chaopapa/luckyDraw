@@ -22,9 +22,9 @@ import java.util.List;
 public class LuckyRosterServiceImpl extends ServiceImpl<LuckyRosterMapper, LuckyRoster> implements ILuckyRosterService {
 
     @Override
-    public R findPage(Page<LuckyRoster> pagination, LuckyRoster search,Integer type,Long ruleId) {
+    public R findPage(Page<LuckyRoster> pagination, LuckyRoster search,Integer type,Long rule) {
 
-        List<LuckyRoster> luckyRosterList = baseMapper.selectRoster(pagination, search,type,ruleId);
+        List<LuckyRoster> luckyRosterList = baseMapper.selectRoster(pagination, search,type,rule);
         pagination.setRecords(luckyRosterList);
         if (pagination == null) {
             return R.empty();

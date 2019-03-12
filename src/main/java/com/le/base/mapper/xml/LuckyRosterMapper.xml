@@ -34,6 +34,10 @@
             <if test="search.name!=null and search.name!=''">
                 and  o.name like CONCAT('%',#{search.name},'%')
             </if>
+            <if test="search.ruleId!=null">
+                and  o.rule_id=#{search.ruleId}
+            </if>
+
             <if test="ruleId!=null">
                 and o.rule_id=#{ruleId}
                 and o.type=1
