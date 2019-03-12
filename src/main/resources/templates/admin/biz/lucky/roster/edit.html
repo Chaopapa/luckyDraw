@@ -10,7 +10,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">订单号:</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" name="no" value="${luckyRoster.no}" placeholder="请输入订单号" required />
+                <input type="text" MAXLENGTH="22"  class="form-control" name="no" value="${luckyRoster.no}" placeholder="请输入订单号" [#if type=='Menu']required[/#if] />
             </div>
         </div>
     </div>
@@ -18,7 +18,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">用户名称:</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" name="name" value="${luckyRoster.name}" placeholder="请输入用户名称" required />
+                <input type="text" MAXLENGTH="20" class="form-control" name="name" value="${luckyRoster.name}" placeholder="请输入用户名称"[#if type=='Menu']required[/#if] />
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">手机号:</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" name="phone" value="${luckyRoster.phone}" placeholder="请输入手机号" required />
+                <input type="text"  MAXLENGTH="11" class="form-control" name="phone" value="${luckyRoster.phone}" placeholder="请输入手机号" required />
             </div>
         </div>
     </div>
@@ -34,7 +34,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">用户地址:</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" name="address" value="${luckyRoster.address}" placeholder="请输入用户地址" required />
+                <input type="text"  MAXLENGTH="50" class="form-control" name="address" value="${luckyRoster.address}" placeholder="请输入用户地址" [#if type=='Menu']required[/#if] />
             </div>
         </div>
     </div>
@@ -65,7 +65,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">排序:</label>
             <div class="col-sm-8">
-                <input type="text" class="form-control" name="seq" value="${luckyRoster.seq}" placeholder="请输入排序" required />
+                <input type="text" class="form-control" name="seq" value="${luckyRoster.seq}" placeholder="请输入排序" />
             </div>
         </div>
     </div>
@@ -84,6 +84,8 @@
     var webReady = function () {
 
     };
+
+
 </script>
 </body>
 </html>

@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.le.base.entity.LuckyRule;
 import com.le.core.rest.R;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -43,4 +45,12 @@ public interface ILuckyRuleService extends IService<LuckyRule> {
      * @return
      */
     void removeRules(List<Long> ids);
+
+    /**
+     * 修改是否有黑白名单
+     *
+     * @param
+     * @return
+     */
+    void updateMenuAndBlacklist(Map<String, Object> map);
 }

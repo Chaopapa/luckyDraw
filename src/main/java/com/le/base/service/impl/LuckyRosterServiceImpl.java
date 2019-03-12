@@ -8,10 +8,15 @@ import com.le.base.entity.LuckyRoster;
 import com.le.base.entity.enums.RosterTypeEnum;
 import com.le.base.mapper.LuckyRosterMapper;
 import com.le.base.service.ILuckyRosterService;
+import com.le.base.service.ILuckyRuleService;
 import com.le.core.rest.R;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -24,6 +29,10 @@ import java.util.List;
 @Service
 public class LuckyRosterServiceImpl extends ServiceImpl<LuckyRosterMapper, LuckyRoster> implements ILuckyRosterService {
 
+
+    @Autowired
+    private ILuckyRuleService luckyRuleService;
+
     @Override
     public R findPage(Page<LuckyRoster> pagination, LuckyRoster search,Integer type,Long rule) {
 
@@ -34,8 +43,24 @@ public class LuckyRosterServiceImpl extends ServiceImpl<LuckyRosterMapper, Lucky
         }
         return R.success(pagination);
     }
-
+    @Transactional
     public R editData(LuckyRoster luckyRoster) {
+        if(luckyRoster.getSeq()==null){
+            luckyRoster.setSeq(999);
+        }
+
+        if(luckyRoster.getId()==null){//新增时
+            Map<String,Object> map = new HashMap<>();
+            map.put("ruleId",luckyRoster.getRuleId());
+            if(luckyRoster.getType().equals(RosterTypeEnum.Menu)){
+                map.put("haveMenu",true);
+            }
+            if(luckyRoster.getType().equals(RosterTypeEnum.Blacklist)){
+                map.put("haveBlacklist",true);
+            }
+
+            luckyRuleService.updateMenuAndBlacklist(map);
+        }
         saveOrUpdate(luckyRoster);
         return R.success();
     }

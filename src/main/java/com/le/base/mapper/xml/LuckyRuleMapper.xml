@@ -32,6 +32,19 @@
         where id=#{id}
 
     </update>
+    <update id="updateMenuAndBlacklist">
+        update
+        biz_lucky_rule
+        <set>
+            <if test="map.haveMenu!=null">
+                have_menu=#{map.haveMenu},
+            </if>
+            <if test="map.haveBlacklist!=null">
+                have_blacklist=#{map.haveBlacklist},
+            </if>
+        </set>
+        where id=#{map.ruleId}
+    </update>
 
     <select id="searchByDate" resultType="com.le.base.entity.LuckyRule">
         SELECT

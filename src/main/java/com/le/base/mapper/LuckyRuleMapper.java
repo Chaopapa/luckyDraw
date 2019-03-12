@@ -15,4 +15,6 @@ public interface LuckyRuleMapper extends BaseMapper<LuckyRule> {
     LuckyRule selectActivityByTime(@Param("map") Map<String, Object> map);
 
     void setNullbyId(@Param("rule") LuckyRule luckyRule,@Param("id") Long id);
+
+    void updateMenuAndBlacklist(@Param("map") Map<String, Object> map);
 }

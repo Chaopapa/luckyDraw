@@ -103,6 +103,12 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
          log.info("ruleMap-"+ruleMap);
     }
 
+    @Override
+    public void updateMenuAndBlacklist(Map<String, Object> map) {
+        baseMapper.updateMenuAndBlacklist(map);
+
+    }
+
     private static Map<String, LuckyRule> ruleMap = new HashMap<>();
 
     @Override
