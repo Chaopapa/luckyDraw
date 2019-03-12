@@ -2,9 +2,12 @@ package com.le.base.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.le.base.entity.LuckyRoster;
+import com.le.base.entity.enums.RosterTypeEnum;
 import com.le.core.rest.R;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+
+import java.util.List;
 
 
 /**
@@ -33,4 +36,6 @@ public interface ILuckyRosterService extends IService<LuckyRoster> {
      * @return
      */
     R editData(LuckyRoster luckyRoster);
+
+    List<LuckyRoster> findByRuleId(Long ruleId, RosterTypeEnum type);
 }

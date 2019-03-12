@@ -1,8 +1,11 @@
 package com.le.base.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.le.base.entity.LuckyRoster;
+import com.le.base.entity.enums.RosterTypeEnum;
 import com.le.base.mapper.LuckyRosterMapper;
 import com.le.base.service.ILuckyRosterService;
 import com.le.core.rest.R;
@@ -35,5 +38,17 @@ public class LuckyRosterServiceImpl extends ServiceImpl<LuckyRosterMapper, Lucky
     public R editData(LuckyRoster luckyRoster) {
         saveOrUpdate(luckyRoster);
         return R.success();
+    }
+
+    @Override
+    public List<LuckyRoster> findByRuleId(Long ruleId, RosterTypeEnum type) {
+        LambdaQueryWrapper<LuckyRoster> lw = new QueryWrapper<LuckyRoster>()
+                .lambda()
+                .eq(LuckyRoster::getRuleId, ruleId)
+                .orderByAsc(LuckyRoster::getSeq);
+        if(type != null){
+            lw.eq(LuckyRoster::getType, type);
+        }
+        return this.list(lw);
     }
 }
