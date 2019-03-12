@@ -42,6 +42,9 @@
             <if test="map.haveBlacklist!=null">
                 have_blacklist=#{map.haveBlacklist},
             </if>
+            <if test="map.limitNo!=null">
+                limit_no=#{map.limitNo},
+            </if>
         </set>
         where id=#{map.ruleId}
     </update>

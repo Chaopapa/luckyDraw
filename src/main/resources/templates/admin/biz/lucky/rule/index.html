@@ -148,10 +148,17 @@
         //操作栏
         function operateFormatter(value, row, index) {
             var list = [];
+
             list.push('<a class="edit btn" href="javascript:void(0)" title="修改"><i class="fa fa-edit"></i>修改</a>  ');
             list.push('<a class="luckyUser btn" href="javascript:void(0)" title="中奖用户"><i class="fa fa-list">查看中奖用户</i></a>  ');
-            list.push('<a class="menu btn" href="javascript:void(0)" title="抽奖名单"><i class="fa fa-list">查看抽奖名单</i></a>  ');
-            list.push('<a class="blacklist btn" href="javascript:void(0)" title="黑名单"><i class="fa fa-list">查看黑名单</i></a>  ');
+            if(row.haveMenu==true){
+                list.push('<a class="menu btn" href="javascript:void(0)" title="抽奖名单"><i class="fa fa-list">查看抽奖名单</i></a>  ');
+
+            }
+            if(row.haveBlacklist==true){
+                list.push('<a class="blacklist btn" href="javascript:void(0)" title="黑名单"><i class="fa fa-list">查看黑名单</i></a>  ');
+            }
+
             return list.join('');
         }
 

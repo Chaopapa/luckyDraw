@@ -48,10 +48,18 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
     }
     @Transactional
     public R editData(LuckyRule luckyRule) {
+
         if(luckyRule.getId()==null){//规则新增时对抽奖名单和黑名单初始化
             luckyRule.setHaveMenu(false);
             luckyRule.setHaveBlacklist(false);
+        }else{//修改时对订单号重复抽奖增加限制，限制为否
+            LuckyRule haveMenuRule = getById(luckyRule.getId());
+            if(Boolean.TRUE.equals(haveMenuRule.getHaveMenu())&&Boolean.TRUE.equals(luckyRule.getLimitNo())){
+                return R.error("已有抽奖名单，不可设置订单号重复抽奖");
+            }
         }
+
+
 
         if(luckyRule.getLimitMinPrice()==null){
             luckyRule.setLimitMinPrice(new  BigDecimal(0));

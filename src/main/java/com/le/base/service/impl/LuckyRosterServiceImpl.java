@@ -51,26 +51,24 @@ public class LuckyRosterServiceImpl extends ServiceImpl<LuckyRosterMapper, Lucky
         }
 
         if (luckyRoster.getId() == null) {//新增时
-            Map<String, Object> map = new HashMap<>();
-            map.put("ruleId", luckyRoster.getRuleId());
             LuckyRule luckyRule = luckyRuleService.getById(luckyRoster.getRuleId());
             if (luckyRoster.getType().equals(RosterTypeEnum.Menu)) {//新增抽奖名单
-                map.put("haveMenu", true);
                 if (Boolean.FALSE.equals(luckyRule.getHaveMenu())) {
-                    luckyRuleService.updateMenuAndBlacklist(map);//将有抽奖名单设为真
-                }
-                if (Boolean.TRUE.equals(luckyRule.getLimitNo())) {
-                    luckyRuleService.updateById(luckyRule.setLimitNo(false));
+                    luckyRule.setHaveMenu(true);
+
                 }
 
             }
             if (luckyRoster.getType().equals(RosterTypeEnum.Blacklist)) {//新增黑名单
-                map.put("haveBlacklist", true);
                 if (Boolean.FALSE.equals(luckyRule.getHaveBlacklist())) {
-                    luckyRuleService.updateMenuAndBlacklist(map);//将有黑名单设为真
+                   luckyRule.setHaveBlacklist(true);
                 }
             }
+            if (Boolean.TRUE.equals(luckyRule.getLimitNo())) {
+               luckyRule.setLimitNo(false);
+            }
 
+            luckyRuleService.saveOrUpdate(luckyRule);
 
         }
         saveOrUpdate(luckyRoster);
