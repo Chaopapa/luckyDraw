@@ -59,14 +59,13 @@ public class LuckyRosterController {
     public String index(ModelMap model, @PathVariable("type") RosterTypeEnum type,Long ruleId) {
         List<LuckyRule> ruleList = luckyRuleService.list(null);
         model.put("ruleList",ruleList);
-
+        model.put("ruleId",ruleId);
         if(type.equals(RosterTypeEnum.Menu)){
             model.put("type",RosterTypeEnum.Menu);
             return MENU;
 
         }else{
             model.put("type",RosterTypeEnum.Blacklist);
-            model.put("ruleId",ruleId);
             return BLACKLIST;
         }
 

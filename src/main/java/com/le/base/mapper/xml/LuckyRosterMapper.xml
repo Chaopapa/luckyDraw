@@ -40,7 +40,6 @@
 
             <if test="ruleId!=null">
                 and o.rule_id=#{ruleId}
-                and o.type=1
             </if>
 
         </where>
