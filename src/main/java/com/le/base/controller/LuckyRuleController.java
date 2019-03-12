@@ -3,6 +3,7 @@ package com.le.base.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.le.base.entity.LuckyRule;
+import com.le.base.entity.enums.RosterTypeEnum;
 import com.le.base.service.ILuckyRuleService;
 import com.le.core.rest.R;
 import com.le.core.util.HttpContextUtils;
@@ -11,6 +12,7 @@ import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -99,8 +101,6 @@ public class LuckyRuleController {
     @RequiresPermissions("base:bizLuckyRule:edit")
     public R del(@RequestParam("ids") List<Long> ids){
         luckyRuleService.removeRules(ids);
-       // luckyRuleService.removeByIds(ids);
-
         return R.success();
     }
 }

@@ -48,6 +48,10 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
     }
     @Transactional
     public R editData(LuckyRule luckyRule) {
+        if(luckyRule.getId()==null){//规则新增时对抽奖名单和黑名单初始化
+            luckyRule.setHaveMenu(false);
+            luckyRule.setHaveBlacklist(false);
+        }
 
         if(luckyRule.getLimitMinPrice()==null){
             luckyRule.setLimitMinPrice(new  BigDecimal(0));

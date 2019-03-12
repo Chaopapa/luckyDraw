@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -126,11 +127,11 @@ public class LuckyRosterController {
      * @param ids
      * @return
      */
-    @RequestMapping("/del")
+    @RequestMapping("/del{type}")
     @ResponseBody
     @RequiresPermissions("base:luckyRoster:edit")
-    public R del(@RequestParam("ids") List<Long> ids){
-        luckyRosterService.removeByIds(ids);
+    public R del(@RequestParam("ids") List<Long> ids,@PathVariable("type")RosterTypeEnum type){
+        luckyRosterService.removeRosters(ids,type);
         return R.success();
     }
 }

@@ -38,4 +38,6 @@ public interface ILuckyRosterService extends IService<LuckyRoster> {
     R editData(LuckyRoster luckyRoster);
 
     List<LuckyRoster> findByRuleId(Long ruleId, RosterTypeEnum type);
+
+    void removeRosters(List<Long> ids, RosterTypeEnum type);
 }

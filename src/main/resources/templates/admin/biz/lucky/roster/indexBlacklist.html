@@ -62,6 +62,7 @@
                data-search-callback=""
                data-BeforeDel="beforeDel"
                data-add-callback="add"
+               data-show-curd="[#if ruleId==null]true[#else]false[/#if]"
                data-operation='{"remove":{icon:"remove","event":"click",class:"remove",eventFun:"removeEve"}}'>
             <thead>
             <tr>
@@ -120,12 +121,15 @@
     //删除
     function remove(data) {
         var checkNodes = '';
+        var checkRuleIds= ''
         for(var i = 0; i < data.length; i++) {
             if(checkNodes == '') {
                 checkNodes = data[i].id;
             } else {
                 checkNodes = checkNodes + ',' + data[i].id;
             }
+
+
         }
         System.confirm({
             title: '系统提示',
@@ -134,7 +138,7 @@
             callback: function(bool) {
                 if(bool) {
                     $.ajax({
-                        url: "del",
+                        url: "delBlacklist",
                         data: {ids: checkNodes},
                         successAuto: function (data) {
                             System.alert({

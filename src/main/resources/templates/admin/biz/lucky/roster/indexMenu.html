@@ -60,6 +60,7 @@
                data-search-callback=""
                data-BeforeDel="beforeDel"
                data-add-callback="add"
+
                data-operation='{"remove":{icon:"remove","event":"click",class:"remove",eventFun:"removeEve"}}'>
             <thead>
             <tr>
@@ -132,7 +133,7 @@
                 callback: function(bool) {
                     if(bool) {
                         $.ajax({
-                            url: "del",
+                            url: "delMenu",
                             data: {ids: checkNodes},
                             successAuto: function (data) {
                                 System.alert({

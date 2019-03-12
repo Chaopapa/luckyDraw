@@ -1,10 +1,12 @@
 package com.le.base.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.le.base.entity.LuckyRoster;
+import com.le.base.entity.LuckyRule;
 import com.le.base.entity.enums.RosterTypeEnum;
 import com.le.base.mapper.LuckyRosterMapper;
 import com.le.base.service.ILuckyRosterService;
@@ -14,9 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * <p>
@@ -34,32 +34,44 @@ public class LuckyRosterServiceImpl extends ServiceImpl<LuckyRosterMapper, Lucky
     private ILuckyRuleService luckyRuleService;
 
     @Override
-    public R findPage(Page<LuckyRoster> pagination, LuckyRoster search,Integer type,Long rule) {
+    public R findPage(Page<LuckyRoster> pagination, LuckyRoster search, Integer type, Long rule) {
 
-        List<LuckyRoster> luckyRosterList = baseMapper.selectRoster(pagination, search,type,rule);
+        List<LuckyRoster> luckyRosterList = baseMapper.selectRoster(pagination, search, type, rule);
         pagination.setRecords(luckyRosterList);
         if (pagination == null) {
             return R.empty();
         }
         return R.success(pagination);
     }
+
     @Transactional
     public R editData(LuckyRoster luckyRoster) {
-        if(luckyRoster.getSeq()==null){
+        if (luckyRoster.getSeq() == null) {
             luckyRoster.setSeq(999);
         }
 
-        if(luckyRoster.getId()==null){//新增时
-            Map<String,Object> map = new HashMap<>();
-            map.put("ruleId",luckyRoster.getRuleId());
-            if(luckyRoster.getType().equals(RosterTypeEnum.Menu)){
-                map.put("haveMenu",true);
+        if (luckyRoster.getId() == null) {//新增时
+            Map<String, Object> map = new HashMap<>();
+            map.put("ruleId", luckyRoster.getRuleId());
+            LuckyRule luckyRule = luckyRuleService.getById(luckyRoster.getRuleId());
+            if (luckyRoster.getType().equals(RosterTypeEnum.Menu)) {//新增抽奖名单
+                map.put("haveMenu", true);
+                if (Boolean.FALSE.equals(luckyRule.getHaveMenu())) {
+                    luckyRuleService.updateMenuAndBlacklist(map);//将有抽奖名单设为真
+                }
+                if (Boolean.TRUE.equals(luckyRule.getLimitNo())) {
+                    luckyRuleService.updateById(luckyRule.setLimitNo(false));
+                }
+
             }
-            if(luckyRoster.getType().equals(RosterTypeEnum.Blacklist)){
-                map.put("haveBlacklist",true);
+            if (luckyRoster.getType().equals(RosterTypeEnum.Blacklist)) {//新增黑名单
+                map.put("haveBlacklist", true);
+                if (Boolean.FALSE.equals(luckyRule.getHaveBlacklist())) {
+                    luckyRuleService.updateMenuAndBlacklist(map);//将有黑名单设为真
+                }
             }
 
-            luckyRuleService.updateMenuAndBlacklist(map);
+
         }
         saveOrUpdate(luckyRoster);
         return R.success();
@@ -71,9 +83,60 @@ public class LuckyRosterServiceImpl extends ServiceImpl<LuckyRosterMapper, Lucky
                 .lambda()
                 .eq(LuckyRoster::getRuleId, ruleId)
                 .orderByAsc(LuckyRoster::getSeq);
-        if(type != null){
+        if (type != null) {
             lw.eq(LuckyRoster::getType, type);
         }
         return this.list(lw);
+    }
+
+    @Override
+    @Transactional
+    public void removeRosters(List<Long> ids, RosterTypeEnum type) {
+
+
+
+        List<Long> ruleList = new ArrayList<>();
+
+        if (CollectionUtil.isNotEmpty(ids)) {
+            for (Long id : ids) {
+                LuckyRoster roster = this.getById(id);
+                Long ruleId = roster.getRuleId();
+                ruleList.add(ruleId);
+            }
+        }
+
+        baseMapper.deleteBatchIds(ids);
+
+        if (CollectionUtil.isNotEmpty(ruleList)) {
+            Collection<LuckyRule> luckyRules = luckyRuleService.listByIds(ruleList);
+            if (CollectionUtil.isNotEmpty(luckyRules)) {
+                for (LuckyRule luckRule : luckyRules) {
+                    QueryWrapper<LuckyRoster> qw = new QueryWrapper<>();
+                    qw.eq("rule_id",luckRule.getId());
+                    qw.eq("type",type);
+
+                    LuckyRoster roster = getOne(qw);
+                    if (roster == null) {
+                        if (type.equals(RosterTypeEnum.Menu)) {
+                            if (Boolean.TRUE.equals(luckRule.getHaveMenu())) {
+                                luckRule.setHaveMenu(false);
+                            }
+                        }
+                        if (type.equals(RosterTypeEnum.Blacklist)) {
+                            if (Boolean.TRUE.equals(luckRule.getHaveBlacklist())) {
+                                luckRule.setHaveBlacklist(false);
+                            }
+                        }
+                        luckyRuleService.updateById(luckRule);
+                    }
+                }
+
+            }
+
+        }
+
+
+
+
     }
 }
