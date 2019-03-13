@@ -14,7 +14,7 @@
                 <li>
                     <label>活动名称:</label>
                     <select type="text" name="ruleId" class="form-control search-input" >
-                        <option value="">请选择活动名称</option>
+                        <option class="hidden" value="">请选择活动名称</option>
                         [#list ruleList as r]
                         <option value="${r.id}">${r.name}</option>
                         [/#list]

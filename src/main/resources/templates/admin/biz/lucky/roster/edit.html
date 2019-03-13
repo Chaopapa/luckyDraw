@@ -26,7 +26,7 @@
         <div class="form-group">
             <label class="control-label col-sm-4">手机号:</label>
             <div class="col-sm-8">
-                <input type="text"  MAXLENGTH="11" class="form-control" name="phone" value="${luckyRoster.phone}" placeholder="请输入手机号" required />
+                <input type="text" id="phone"  MAXLENGTH="11" class="form-control" name="phone" value="${luckyRoster.phone}" placeholder="请输入手机号" required />
             </div>
         </div>
     </div>
@@ -81,9 +81,35 @@
 </form>
 <script type="text/javascript">
     //所有的js执行程序必须在webReady执行之后才能执行
-    var webReady = function () {
+    $(function () {
+        setTimeout(function () {
+            $("#form").bootstrapValidator("addField", "phone", {
+                validators: {
+                    regexp:{
+                        regexp: /^[0-9]*[1-9][0-9]*$/,
+                        message: "请输入手机号码"
+                    }
+                }
+            });
+            $("#form").bootstrapValidator("addField", "seq", {
+                validators: {
+                    regexp:{
+                        regexp: /^[0-9]*[1-9][0-9]*$/,
+                        message: "请输入数字排序"
+                    }
+                }
+            });
+            $("#form").bootstrapValidator("addField", "no", {
+                validators: {
+                    regexp:{
+                        regexp: /^[0-9]*[1-9][0-9]*$/,
+                        message: "请输入数字订单号"
+                    }
+                }
+            });
 
-    };
+        },1000)
+   })
 
 
 </script>
