@@ -59,7 +59,10 @@
             limit_min_price,
             limit_max_price,
             limit_no,
-            limit_phone
+            limit_phone,
+            have_menu,
+            name,
+            have_blacklist
         FROM
             biz_lucky_rule
         WHERE
