@@ -18,6 +18,8 @@ import java.util.List;
  */
 public interface ILuckyUserService extends IService<LuckyUser> {
 
+    void saveUser(AisheliOrderDto dto, Long ruleId);
+
     String doDrawAndSaveUser(List<AisheliOrderDto> orders, Long ruleId);
 
     List<LuckyUser> getByRuleId(Long ruleId);

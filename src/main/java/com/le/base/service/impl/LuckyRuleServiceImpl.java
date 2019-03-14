@@ -5,12 +5,9 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import cn.hutool.core.date.DateUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.le.base.entity.LuckyRule;
 import com.le.base.mapper.LuckyRuleMapper;
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.le.base.service.ILuckyRuleService;
 import com.le.core.rest.R;
 import lombok.extern.slf4j.Slf4j;
@@ -46,6 +43,7 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
         }
         return R.success(page);
     }
+
     @Transactional
     public R editData(LuckyRule luckyRule) {
 
@@ -59,12 +57,9 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
             }
         }
 
-
-
         if(luckyRule.getLimitMinPrice()==null){
             luckyRule.setLimitMinPrice(new  BigDecimal(0));
         }
-
 
         if (luckyRule.getLimitEndDate().compareTo(luckyRule.getLimitBeginDate()) < 0) {
             return R.error("订单的结束时间不能早于订单的开始时间");
@@ -110,9 +105,6 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
     @Override
     public void removeRules(List<Long> ids) {
          baseMapper.deleteBatchIds(ids);
-         log.info("ruleMap:"+ruleMap);
-         ruleMap.clear();
-         log.info("ruleMap-"+ruleMap);
     }
 
     @Override
@@ -121,41 +113,11 @@ public class LuckyRuleServiceImpl extends ServiceImpl<LuckyRuleMapper, LuckyRule
 
     }
 
-    private static Map<String, LuckyRule> ruleMap = new HashMap<>();
-
     @Override
     public LuckyRule getByTime() {
         Date date = new Date();
         String now = DateUtil.formatDateTime(date);
-        LuckyRule luckyRule = null;
-        if (ruleMap == null || ruleMap.size() == 0) {
-            luckyRule = searchByDate(now);
-            if (luckyRule == null) {
-                return null;
-            }
-            String beginDate = DateUtil.formatDateTime(luckyRule.getBeginDate());
-            String endDate = DateUtil.formatDateTime(luckyRule.getEndDate());
-            ruleMap.put(beginDate + "@" + endDate, luckyRule);
-            return luckyRule;
-        } else {
-            for (Iterator<Map.Entry<String, LuckyRule>> it = ruleMap.entrySet().iterator(); it.hasNext(); ) {
-                Map.Entry<String, LuckyRule> item = it.next();
-                String key = item.getKey();
-                String[] time = key.split("@");
-                Date beginDate = DateUtil.parseDateTime(time[0]);
-                Date endDate = DateUtil.parseDateTime(time[1]);
-                if (DateUtil.isIn(date, beginDate, endDate)) {
-                    luckyRule = item.getValue();
-                    break;
-                } else {
-                    luckyRule = searchByDate(now);
-                    if (luckyRule == null) {
-                        return null;
-                    }
-                    it.remove();
-                }
-            }
-        }
+        LuckyRule luckyRule = searchByDate(now);
         return luckyRule;
     }
 

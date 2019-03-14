@@ -33,13 +33,13 @@ public class MybatisPlusConfig {
     /**
      * sql 拦截器分析
      */
-    @Bean
-    public PerformanceInterceptor performanceInterceptor(){
-        PerformanceInterceptor performanceInterceptor = new PerformanceInterceptor();
-        performanceInterceptor.setMaxTime(30000);
-        performanceInterceptor.setFormat(true);
-        return performanceInterceptor;
-    }
+//    @Bean
+//    public PerformanceInterceptor performanceInterceptor(){
+//        PerformanceInterceptor performanceInterceptor = new PerformanceInterceptor();
+//        performanceInterceptor.setMaxTime(30000);
+//        performanceInterceptor.setFormat(true);
+//        return performanceInterceptor;
+//    }
 
     /**
      * 逻辑删 注入
