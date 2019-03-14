@@ -76,13 +76,18 @@ public class LuckyRosterServiceImpl extends ServiceImpl<LuckyRosterMapper, Lucky
     }
 
     @Override
-    public List<LuckyRoster> findByRuleId(Long ruleId, RosterTypeEnum type) {
-        LambdaQueryWrapper<LuckyRoster> lw = new QueryWrapper<LuckyRoster>()
-                .lambda()
-                .eq(LuckyRoster::getRuleId, ruleId)
-                .orderByAsc(LuckyRoster::getSeq);
-        if (type != null) {
-            lw.eq(LuckyRoster::getType, type);
+    public List<LuckyRoster> findByRuleId(Long ruleId, Boolean isHaveMenu, Boolean isHaveBlacklist) {
+        if(Boolean.FALSE.equals(isHaveMenu) && Boolean.FALSE.equals(isHaveBlacklist)){
+            return null;
+        }
+        LambdaQueryWrapper<LuckyRoster> lw = new QueryWrapper<LuckyRoster>().lambda();
+        lw.eq(LuckyRoster::getRuleId, ruleId).orderByAsc(LuckyRoster::getSeq);
+        if(!(Boolean.TRUE.equals(isHaveMenu) && Boolean.TRUE.equals(isHaveBlacklist))){
+            if (Boolean.TRUE.equals(isHaveMenu)) {
+                lw.eq(LuckyRoster::getType, RosterTypeEnum.Menu);
+            } else if (Boolean.TRUE.equals(isHaveBlacklist)) {
+                lw.eq(LuckyRoster::getType, RosterTypeEnum.Blacklist);
+            }
         }
         return this.list(lw);
     }

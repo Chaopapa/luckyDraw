@@ -33,21 +33,27 @@ import java.util.*;
 public class LuckyUserServiceImpl extends ServiceImpl<LuckyUserMapper, LuckyUser> implements ILuckyUserService {
 
     @Override
+    @Transactional
     public String doDrawAndSaveUser(List<AisheliOrderDto> orders, Long ruleId) {
         Collections.shuffle(orders);
         Random random= new Random();
         int index = random.nextInt(orders.size());
         log.info("index:"+index);
         AisheliOrderDto dto = orders.get(index);
+        saveUser(dto, ruleId);
+        return dto.getO();
+    }
+
+    @Override
+    public void saveUser(AisheliOrderDto dto, Long ruleId){
         LuckyUser luckyUser = new LuckyUser();
         luckyUser.setAddress(dto.getA())
                 .setNo(dto.getO())
                 .setName(dto.getN())
                 .setPhone(dto.getP())
                 .setRuleId(ruleId);
-        save(luckyUser);
         log.info("lucky no :" + dto.getO());
-        return dto.getO();
+        save(luckyUser);
     }
 
     @Override
